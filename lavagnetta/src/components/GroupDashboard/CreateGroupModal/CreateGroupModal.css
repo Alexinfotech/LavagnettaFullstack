@@ -1,0 +1,26 @@
+/* ==== ./components/GroupDashboard/CreateGroupModal/CreateGroupModal.css ==== */
+/* src/components/GroupDashboard/CreateGroupModal/CreateGroupModal.css */
+
+/* Stili specifici per la modale di creazione gruppo, se necessari.
+   Altrimenti, si basa sugli stili modali generali definiti altrove (es. Calendar.css)
+   e sugli stili dei form definiti in index.css */
+
+.create-group-modal .form-group {
+    /* Esempio: aggiungi spazio extra se serve */
+    margin-bottom: var(--spacing-medium);
+}
+
+.create-group-modal .error-text {
+    /* Stile per eventuali errori specifici di questo form */
+    color: var(--color-accent-danger);
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-small);
+    display: block;
+    margin-top: 0.25rem;
+}
+
+.create-group-modal input.error,
+.create-group-modal textarea.error {
+    /* Stile campi in errore */
+    border-color: var(--color-accent-danger);
+}

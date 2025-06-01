@@ -1,0 +1,263 @@
+/* src/components/GroupDashboard/PermissionLegend.css */
+
+/* Contenitore generale della legenda */
+.permission-legend-content {
+    /* Il padding viene ereditato da Accordion.Body, ma puoi aggiungerne se serve */
+    /* padding: var(--spacing-md); */
+    font-family: var(--font-secondary);
+    /* Font per il testo descrittivo */
+    color: var(--color-text-light-gray);
+    /* Colore testo default più chiaro del grigio muted */
+    font-size: 0.95rem;
+    /* Dimensione base testo legenda */
+    line-height: 1.6;
+    /* Interlinea per leggibilità */
+}
+
+/* Titolo principale della legenda */
+.permission-legend-content h5 {
+    color: var(--color-text-chalk);
+    /* Bianco/gesso */
+    font-family: var(--font-primary);
+    /* Font primario */
+    margin-bottom: var(--spacing-md);
+    font-weight: var(--fw-bold);
+    text-align: center;
+    /* Centra il titolo */
+    font-size: 1.3rem;
+    /* Dimensione titolo legenda */
+}
+
+/* Paragrafo introduttivo */
+.legend-intro {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-text-medium-gray);
+    /* Un grigio leggermente più scuro */
+}
+
+/* Separatori orizzontali */
+.legend-hr {
+    border: none;
+    /* Rimuovi bordo di default */
+    border-top: 1px solid var(--color-border-dark);
+    /* Linea sottile scura */
+    margin-top: var(--spacing-xl);
+    /* Più spazio sopra/sotto HR */
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Meno spazio prima del primo e dopo l'ultimo HR */
+.permission-legend-content>hr:first-of-type {
+    margin-top: var(--spacing-lg);
+}
+
+.permission-legend-content>hr:last-of-type {
+    margin-bottom: var(--spacing-lg);
+}
+
+
+/* Sezione per ogni ruolo */
+.role-section {
+    margin-bottom: var(--spacing-lg);
+    /* Spazio tra sezioni ruolo */
+}
+
+/* Titolo del ruolo (es. Amministratore) */
+.role-title {
+    display: block;
+    /* Occupa tutta la riga */
+    font-family: var(--font-primary);
+    /* Font primario */
+    font-size: 1.15rem;
+    /* Dimensione titolo ruolo */
+    font-weight: var(--fw-bold);
+    margin-bottom: var(--spacing-sm);
+    /* Spazio sotto il titolo */
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 2px solid;
+    /* Sottolineatura colorata */
+    border-image-slice: 1;
+    /* Assicura che il bordo sia solido */
+}
+
+/* Colori specifici per i titoli dei ruoli */
+.role-admin {
+    color: #2196F3;
+    /* Blu */
+    border-image-source: linear-gradient(to right, #2196F3, #64b5f6);
+    /* Gradiente per il bordo */
+}
+
+.role-editor {
+    color: #4CAF50;
+    /* Verde */
+    border-image-source: linear-gradient(to right, #4CAF50, #81c784);
+}
+
+.role-contributor {
+    color: #FF9800;
+    /* Arancione */
+    border-image-source: linear-gradient(to right, #FF9800, #ffb74d);
+}
+
+/* Descrizione del ruolo */
+.role-description {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-light-gray);
+    /* Grigio chiaro */
+}
+
+/* Lista dei permessi */
+.role-permissions {
+    list-style: none;
+    /* Rimuovi pallini di default */
+    padding-left: 0;
+    /* Rimuovi indentazione di default */
+    margin-bottom: 0;
+    /* Rimuovi margine inferiore lista */
+}
+
+.role-permissions li {
+    margin-bottom: var(--spacing-sm);
+    /* Spazio tra i punti della lista */
+    padding-left: 1.5em;
+    /* Crea spazio per l'icona/bullet custom */
+    position: relative;
+    /* Necessario per posizionare il pseudo-elemento */
+}
+
+/* Aggiungi un bullet personalizzato (es. un quadratino o un check) */
+.role-permissions li::before {
+    content: '▪';
+    /* Puoi usare '✔', '•', '▸' o un'icona FontAwesome via content: '\f00c'; */
+    color: var(--color-primary);
+    /* Usa il colore primario dell'app */
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+    /* Aggiusta posizione verticale */
+    font-size: 0.9em;
+    /* Dimensione del bullet */
+}
+
+.role-permissions li strong {
+    color: var(--color-text-chalk);
+    /* Evidenzia i titoli delle sezioni */
+    font-weight: var(--fw-semibold);
+}
+
+/* Stile per le sotto-liste (permessi prodotti Contributor) */
+.sub-permissions {
+    list-style: none;
+    padding-left: 1.5em;
+    /* Indenta ulteriormente */
+    margin-top: var(--spacing-sm);
+    /* Spazio sopra la sotto-lista */
+    margin-bottom: var(--spacing-sm);
+}
+
+.sub-permissions li {
+    margin-bottom: var(--spacing-xs);
+    /* Meno spazio tra sotto-punti */
+}
+
+/* Sotto-bullet diverso (es. un trattino) */
+.sub-permissions li::before {
+    content: '-';
+    color: var(--color-text-medium-gray);
+    /* Colore più tenue */
+    font-weight: bold;
+    left: 0.1em;
+    /* Aggiusta posizione */
+    top: 0;
+    font-size: 1em;
+}
+
+
+/* Nota finale */
+.legend-note {
+    margin-top: var(--spacing-lg);
+    text-align: center;
+    color: var(--color-text-medium-gray);
+    font-size: 0.9rem;
+}
+
+.legend-note em {
+    font-style: normal;
+    /* Rimuovi corsivo di default se usi em solo per semantica */
+}
+
+/* ==== src/components/GroupDashboard/GroupDashboard.css (Stili Aggiuntivi per Modale Legenda) ==== */
+
+/* Stile per il pulsante info nell'header (opzionale) */
+.header-actions .info-button {
+    /* Puoi aggiungere stili specifici se vuoi differenziarlo dagli altri btn-icon-header */
+    /* Esempio: color: var(--color-info); */
+}
+
+/* Stile per la Modale della Legenda */
+.permission-legend-modal .modal-content {
+    background-color: var(--color-bg-dark);
+    /* Sfondo scuro */
+    color: var(--color-text-chalk);
+    /* Testo chiaro */
+    border: 1px solid var(--color-border-dark);
+    border-radius: var(--border-radius-lg);
+    /* Raggio più ampio? */
+}
+
+.permission-legend-modal .modal-header {
+    background-color: var(--color-bg-medium);
+    /* Sfondo leggermente diverso per header? */
+    border-bottom: 1px solid var(--color-border-dark);
+    padding: var(--spacing-md) var(--spacing-lg);
+}
+
+.permission-legend-modal .modal-header .modal-title {
+    color: var(--color-text-chalk);
+    font-family: var(--font-primary);
+    font-weight: var(--fw-bold);
+}
+
+/* Stile per il pulsante di chiusura bianco */
+.permission-legend-modal .modal-header .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+    /* Rende l'icona bianca */
+}
+
+.permission-legend-modal .modal-header .btn-close:hover {
+    opacity: 0.8;
+}
+
+
+.permission-legend-modal .modal-body {
+    padding: var(--spacing-lg);
+    /* Buon padding interno */
+    /* Qui eredita gli stili definiti in PermissionLegend.css */
+}
+
+.permission-legend-modal .modal-footer {
+    background-color: var(--color-bg-medium);
+    border-top: 1px solid var(--color-border-dark);
+    padding: var(--spacing-md) var(--spacing-lg);
+}
+
+/* Rendi i bottoni del footer più visibili */
+.permission-legend-modal .modal-footer .btn-secondary {
+    background-color: var(--color-bg-darker);
+    /* Colore più scuro */
+    border-color: var(--color-border-medium);
+    color: var(--color-text-light-gray);
+}
+
+.permission-legend-modal .modal-footer .btn-secondary:hover {
+    background-color: var(--color-bg-medium);
+    /* Schiarisce al hover */
+    border-color: var(--color-border-light);
+    color: var(--color-text-chalk);
+}
+
+
+/* --- Stili Esistenti --- */
+/* ... (mantieni tutti gli altri stili di GroupDashboard.css) ... */

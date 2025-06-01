@@ -1,0 +1,520 @@
+/* src/components/Board/Chatbot/Chatbot.css */
+
+/* Variabili Colori (simili a WhatsApp) */
+:root {
+    --chatbot-primary-green: #075E54;
+    /* Verde scuro header */
+    --chatbot-secondary-green: #128C7E;
+    /* Verde più chiaro per accenti */
+    --chatbot-light-green: #25D366;
+    /* Verde brillante (bottone invio, status) */
+    --chatbot-message-out: #DCF8C6;
+    /* Verde chiaro messaggio utente */
+    --chatbot-message-in: #FFFFFF;
+    /* Bianco messaggio assistente */
+    --chatbot-background: #E5DDD5;
+    /* Sfondo area messaggi (o usa un pattern) */
+    /* --chatbot-background-pattern: url('/path/to/whatsapp-pattern.png'); */
+    --chatbot-input-bg: #F0F0F0;
+    /* Sfondo barra input */
+    --chatbot-text-dark: #303030;
+    /* Testo scuro su sfondi chiari */
+    --chatbot-text-light: #FFFFFF;
+    /* Testo chiaro su sfondi scuri */
+    --chatbot-text-meta: #667781;
+    /* Grigio per timestamp/status */
+    --chatbot-icon-gray: #54656f;
+    /* Grigio per icone input */
+    --chatbot-border-light: #e9edef;
+    /* Bordo chiaro */
+}
+
+/* Wrapper Principale */
+.chatbot-wrapper {
+    position: fixed;
+    z-index: 1050;
+    /* Alto, ma sotto eventuali Modali Bootstrap (1055+) */
+    transition: width 0.4s ease-in-out, height 0.4s ease-in-out,
+        bottom 0.4s ease-in-out, right 0.4s ease-in-out,
+        border-radius 0.4s ease-in-out, box-shadow 0.4s ease-in-out,
+        opacity 0.4s ease-in-out;
+    overflow: hidden;
+    /* Nasconde contenuto durante transizione */
+    opacity: 0;
+    /* Nascosto finché isOpen non è true */
+    pointer-events: none;
+    /* Non interagibile quando nascosto */
+}
+
+/* Stato Visibile (quando la prop isOpen è true) */
+.chatbot-wrapper.visible {
+    opacity: 1;
+    pointer-events: auto;
+    /* Rende interagibile */
+}
+
+/* Stile Bottone Flottante (quando isOpen=true, chat-open=false) */
+.chatbot-wrapper:not(.chat-open) {
+    width: 50px;
+    height: 50px;
+    bottom: var(--fab-bottom-spacing);
+    right: var(--fab-right-spacing);
+    border-radius: 50%;
+    background-color: var(--chatbot-light-green);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    display: flex;
+    /* Per centrare icona interna */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    animation: pulse 2s infinite;
+}
+
+/* Contenitore icona dentro bottone flottante */
+.floating-chatbot-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* Stile Finestra Chat (quando chat-open=true) */
+.chatbot-wrapper.chat-open {
+    /* Default (Desktop) */
+    width: 90vw;
+    max-width: 450px;
+    height: 75vh;
+    max-height: 650px;
+    bottom: 15px;
+    /* Leggermente più in alto */
+    right: 15px;
+    border-radius: 8px;
+    /* Meno arrotondato di 25px */
+    background-color: var(--chatbot-background);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    /* Per layout interno */
+    flex-direction: column;
+    animation: none;
+    /* Ferma animazione pulse */
+}
+
+/* Contenitore Animazione Apertura (come prima, se mantenuto) */
+.animation-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    z-index: 2;
+    /* Sopra il bottone, sotto la chat */
+}
+
+.opening-animation {
+    width: 60%;
+    height: auto;
+    max-width: 150px;
+}
+
+/* Nascondi animazione se non attiva */
+.chatbot-wrapper:not(.animating) .animation-container {
+    display: none;
+}
+
+
+/* Contenitore Finestra Chat */
+.chat-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    /* Sempre visibile quando .chat-open è attivo */
+    visibility: visible;
+    border-radius: inherit;
+    /* Eredita arrotondamento */
+    overflow: hidden;
+    /* Nasconde angoli figli */
+}
+
+
+/* Chat Header */
+.chat-header {
+    background-color: var(--chatbot-primary-green);
+    padding: 10px 16px;
+    /* Padding stile WhatsApp */
+    color: var(--chatbot-text-light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    /* Non si restringe */
+    box-sizing: border-box;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    /* Spazio tra gif e info */
+    overflow: hidden;
+    /* Per nome lungo */
+}
+
+.header-gif-container {
+    width: 40px;
+    /* Ridotto */
+    height: 40px;
+    /* Ridotto */
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Sfondo leggero se gif non carica */
+}
+
+.header-gif {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.header-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+    overflow: hidden;
+}
+
+.header-info h4 {
+    margin: 0;
+    font-size: 1rem;
+    /* Dimensione nome */
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.status-text {
+    font-size: 0.75rem;
+    /* Dimensione status */
+    color: rgba(255, 255, 255, 0.8);
+    /* Rimosso status-dot */
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: var(--chatbot-text-light);
+    font-size: 1.4rem;
+    /* Dimensione icona chiusura */
+    padding: 5px;
+    /* Area cliccabile */
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.close-button:hover {
+    opacity: 1;
+}
+
+
+/* Area Messaggi */
+.chat-messages {
+    flex-grow: 1;
+    /* Occupa spazio rimanente */
+    padding: 12px;
+    /* Padding interno */
+    overflow-y: auto;
+    /* Scroll verticale */
+    background-color: var(--chatbot-background);
+    /* background-image: var(--chatbot-background-pattern); */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    /* Spazio tra messaggi */
+    overscroll-behavior-y: contain;
+    /* Evita scroll della pagina padre */
+}
+
+/* Wrapper per ogni blocco messaggio (allinea a dx/sx) */
+.message-wrapper {
+    display: flex;
+    margin-bottom: 2px;
+    /* Piccolo spazio aggiuntivo */
+}
+
+.message-wrapper.user {
+    justify-content: flex-end;
+}
+
+.message-wrapper.assistant {
+    justify-content: flex-start;
+}
+
+/* Bolla Messaggio */
+.message {
+    max-width: 75%;
+    /* Larghezza massima bolla */
+    padding: 8px 12px;
+    /* Padding interno bolla */
+    border-radius: 8px;
+    /* Arrotondamento WhatsApp */
+    line-height: 1.4;
+    font-size: 0.9rem;
+    /* Dimensione testo messaggio */
+    word-wrap: break-word;
+    /* Va a capo parole lunghe */
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    /* Font Stack */
+    position: relative;
+    /* Per eventuale coda */
+}
+
+.user-message {
+    background-color: var(--chatbot-message-out);
+    color: var(--chatbot-text-dark);
+    border-top-right-radius: 0;
+    /* Angolo WhatsApp */
+}
+
+.assistant-message {
+    background-color: var(--chatbot-message-in);
+    color: var(--chatbot-text-dark);
+    border-top-left-radius: 0;
+    /* Angolo WhatsApp */
+}
+
+/* Stile per testo in grassetto nel messaggio */
+.message-content strong {
+    font-weight: 600;
+}
+
+/* Indicatore di Scrittura (dentro un wrapper) */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    /* Stesso padding delle bolle */
+}
+
+.typing-indicator .dot {
+    width: 7px;
+    height: 7px;
+    background-color: #999;
+    border-radius: 50%;
+    margin: 0 2px;
+    /* Spazio tra i punti */
+    animation: typingBlink 1.4s infinite both;
+}
+
+.typing-indicator .dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator .dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typingBlink {
+    0% {
+        opacity: .2;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: .2;
+    }
+}
+
+
+/* Selettore Ingredienti (sotto messaggio assistente) */
+.ingredient-selector {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid var(--chatbot-border-light);
+}
+
+.ingredient-selector h5 {
+    font-size: 0.85rem;
+    color: var(--chatbot-text-meta);
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.ingredient-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px 0;
+    max-height: 150px;
+    /* Limita altezza lista */
+    overflow-y: auto;
+    /* Scroll se necessario */
+    font-size: 0.85rem;
+}
+
+.ingredient-label {
+    display: flex;
+    /* Allinea checkbox e testo */
+    align-items: center;
+    cursor: pointer;
+    padding: 4px 0;
+    color: var(--chatbot-text-dark);
+}
+
+.ingredient-checkbox {
+    margin-right: 8px;
+    width: 16px;
+    /* Dimensione checkbox */
+    height: 16px;
+    cursor: pointer;
+    accent-color: var(--chatbot-secondary-green);
+    /* Colore check */
+}
+
+.ingredient-name {
+    flex-grow: 1;
+}
+
+.add-ingredients-button {
+    display: block;
+    /* Occupa tutta larghezza */
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--chatbot-secondary-green);
+    color: var(--chatbot-text-light);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-align: center;
+}
+
+.add-ingredients-button:hover:not(:disabled) {
+    background-color: var(--chatbot-primary-green);
+}
+
+.add-ingredients-button:disabled {
+    background-color: #b0d9d3;
+    /* Verde sbiadito */
+    cursor: not-allowed;
+}
+
+
+/* Barra Input */
+.chat-input-bar {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    /* Padding barra */
+    background-color: var(--chatbot-input-bg);
+    border-top: 1px solid var(--chatbot-border-light);
+    flex-shrink: 0;
+    /* Non si restringe */
+}
+
+.chat-input-bar .icon-button {
+    background: none;
+    border: none;
+    color: var(--chatbot-icon-gray);
+    font-size: 1.3rem;
+    /* Dimensione icone input */
+    padding: 8px;
+    /* Area cliccabile */
+    cursor: pointer;
+    opacity: 0.9;
+    transition: opacity 0.2s ease;
+}
+
+.chat-input-bar .icon-button:hover {
+    opacity: 1;
+}
+
+.chat-input-bar input[type="text"] {
+    flex-grow: 1;
+    /* Occupa spazio rimanente */
+    padding: 10px 15px;
+    /* Padding interno input */
+    border: none;
+    border-radius: 20px;
+    /* Input arrotondato */
+    outline: none;
+    font-size: 0.95rem;
+    /* Dimensione testo input */
+    color: var(--chatbot-text-dark);
+    background-color: var(--chatbot-message-in);
+    /* Sfondo bianco */
+    margin: 0 8px;
+    /* Spazio tra icone e input */
+}
+
+.send-button {
+    background-color: var(--chatbot-light-green);
+    /* Verde bottone invio */
+    border: none;
+    border-radius: 50%;
+    color: var(--chatbot-text-light);
+    width: 40px;
+    /* Dimensione bottone invio */
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    /* Dimensione icona invio */
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    flex-shrink: 0;
+}
+
+.send-button:hover {
+    background-color: var(--chatbot-secondary-green);
+    /* Verde più scuro hover */
+}
+
+
+/* Animazione Pulse Bottone Flottante (Invariata) */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}
+
+/* Animazione Apertura (Invariata) */
+/* Nota: L'animazione holdPress non era definita nel CSS fornito, ma la lascio commentata
+   se vuoi ripristinarla con un keyframe specifico */
+/*
+@keyframes holdPress {
+     ... definizione keyframe ...
+}
+*/
+
+/* --- MEDIA QUERIES --- */
+
+/* ------------- MODIFICHE RESPONSIVE MOBILE ------------- */

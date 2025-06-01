@@ -1,0 +1,67 @@
+/* src/components/Statistics/StatisticsPage.css */
+
+.statistics-page {
+    /* Aggiungi eventuali stili generali per la pagina */
+}
+
+.statistics-page .card {
+    /* Assicura che le card usino lo sfondo scuro definito globalmente */
+    background-color: var(--color-bg-dark);
+    border-color: var(--color-border-dark);
+    color: var(--color-text-light-gray);
+}
+
+.statistics-page .card-header {
+    background-color: var(--color-bg-medium);
+    color: var(--color-text-chalk);
+    font-family: var(--font-primary);
+    font-size: var(--fs-lg);
+    border-bottom-color: var(--color-border-dark);
+}
+
+.statistics-page .form-label {
+    color: var(--color-text-light-gray);
+    font-size: var(--fs-sm);
+}
+
+.statistics-page .form-control,
+.statistics-page .form-select {
+    background-color: var(--color-bg-medium);
+    color: var(--color-text-chalk);
+    border-color: var(--color-border-dark);
+    font-size: var(--fs-ui);
+}
+
+.statistics-page .form-control:focus,
+.statistics-page .form-select:focus {
+    background-color: var(--color-bg-medium);
+    color: var(--color-text-chalk);
+    border-color: var(--color-accent-primary);
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.35);
+}
+
+/* Stili specifici per le card di riepilogo colorate */
+.statistics-page .card[bg="success"] .card-title,
+.statistics-page .card[bg="info"] .card-title,
+.statistics-page .card[bg="secondary"] .card-title {
+    color: rgba(255, 255, 255, 0.9);
+    /* Rende il titolo più leggibile su sfondi colorati */
+    font-family: var(--font-secondary);
+    /* Usa font leggibile per titolo card */
+    font-weight: var(--fw-bold);
+    font-size: var(--fs-ui);
+    margin-bottom: 0.3rem;
+}
+
+.statistics-page .card[bg="success"] .card-text,
+.statistics-page .card[bg="info"] .card-text,
+.statistics-page .card[bg="secondary"] .card-text {
+    font-family: var(--font-secondary);
+}
+
+.statistics-page .card[bg="success"] small,
+.statistics-page .card[bg="info"] small,
+.statistics-page .card[bg="secondary"] small {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: var(--fs-xs);
+}

@@ -1,0 +1,19 @@
+/* frontend/src/components/GroupDashboard/GroupDetail/GroupBoardView.css */
+
+.group-board-view-container {
+    /* Stili specifici per il contenitore della vista, se necessario */
+    /* Ad esempio, padding diversi da /board */
+    padding-top: 10px;
+    /* Meno padding se non c'è l'Header standard */
+}
+
+.group-board-view-loading,
+.group-board-view-error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px);
+    /* Esempio altezza */
+    text-align: center;
+}

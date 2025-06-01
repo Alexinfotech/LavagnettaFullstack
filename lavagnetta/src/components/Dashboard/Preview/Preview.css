@@ -1,0 +1,376 @@
+/* ==== src/components/Dashboard/Preview/Preview.css (MODIFICATO v19 - Bordo Card Più Arrotondato) ==== */
+
+.preview-container {
+    overflow: hidden;
+    padding: var(--spacing-base) 0;
+}
+
+/* Riga di Anteprime */
+.preview-row {
+    margin-bottom: var(--spacing-xl);
+}
+
+.preview-row:last-child {
+    margin-bottom: var(--spacing-base);
+}
+
+/* Header Riga Gruppo */
+.preview-row-header {
+    padding-left: var(--responsive-padding-sm);
+    padding-right: var(--responsive-padding-sm);
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.preview-row-title {
+    font-family: var(--font-primary);
+    font-size: 1.9rem;
+    font-weight: var(--fw-bold);
+    margin: 0;
+    color: var(--color-text-chalk);
+    padding-bottom: 0;
+    padding-left: var(--spacing-sm);
+    border-bottom: none;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.preview-row-header .badge {
+    font-family: var(--font-secondary);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-bold);
+    background-color: var(--color-accent-secondary) !important;
+    color: var(--color-text-light-gray) !important;
+    padding: 0.4em 0.8em;
+    text-transform: capitalize;
+    flex-shrink: 0;
+}
+
+/* --- Stile Slider Slick --- */
+.slick-slider {
+    margin: 0 -0.5rem;
+}
+
+.card-slide-wrapper {
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+    outline: none;
+}
+
+/* Frecce Slider */
+.slick-prev,
+.slick-next {
+    z-index: 20;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(20, 20, 20, 0.6);
+    border-radius: 50%;
+    border: none;
+    transition: background-color 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+    display: none;
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.preview-row:hover .slick-prev,
+.preview-row:hover .slick-next {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+    background-color: rgba(15, 15, 15, 0.85);
+    transform: scale(1.15);
+}
+
+.slick-prev::before,
+.slick-next::before {
+    font-family: 'slick';
+    font-size: 20px;
+    color: var(--color-text-chalk);
+    opacity: 1;
+}
+
+.slick-prev {
+    left: 10px;
+}
+
+.slick-next {
+    right: 10px;
+}
+
+.slick-disabled {
+    opacity: 0.3 !important;
+    cursor: default;
+    transform: none !important;
+    background-color: rgba(20, 20, 20, 0.5) !important;
+}
+
+@media (min-width: 768px) {
+
+    .slick-prev,
+    .slick-next {
+        display: block;
+        opacity: 0;
+    }
+
+    .preview-row:hover .slick-prev,
+    .preview-row:hover .slick-next {
+        opacity: 1;
+    }
+}
+
+
+/* --- Stile Card Anteprima (Orizzontale 16:9 - Bordo Arrotondato) --- */
+.board-card-preview {
+    display: block;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: var(--color-text-chalk);
+    /* *** MODIFICA: Bordo più arrotondato *** */
+    border-radius: var(--border-radius-lg);
+    /* Usa la variabile per l'arrotondamento maggiore (8px) */
+    overflow: hidden;
+    /* Mantiene overflow hidden */
+    box-shadow: var(--shadow-soft);
+    cursor: pointer;
+    position: relative;
+    aspect-ratio: 16 / 9;
+    /* Mantiene forma orizzontale */
+    background-color: var(--color-bg-medium);
+    border: 1px solid transparent;
+    transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1),
+        box-shadow 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Overlay Sfondo */
+.board-card-preview::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    border-radius: inherit;
+    /* Eredita l'arrotondamento dalla card principale */
+    z-index: 1;
+    transition: background-color 0.3s ease;
+    background-color: var(--color-bg-overlay-dark);
+    background-blend-mode: multiply;
+}
+
+/* Effetto Hover */
+@media (hover: hover) {
+    .board-card-preview:hover {
+        transform: scale(1.05) translateY(-4px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.45);
+        z-index: 10;
+    }
+
+    .board-card-preview:hover::before {
+        background-color: rgba(0, 0, 0, 0.35);
+    }
+
+    .board-card-preview:hover .board-card-preview__details-btn {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (hover: none) {
+    .board-card-preview__details-btn {
+        opacity: 0.7;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Contenuto Interno */
+.board-card-preview__content {
+    padding: var(--spacing-base);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 35%);
+    opacity: 1;
+    overflow: hidden;
+}
+
+/* Header Card (Titolo) */
+.board-card-preview__header {
+    margin-bottom: var(--spacing-sm);
+}
+
+.board-card-preview__title {
+    font-family: var(--font-primary);
+    font-size: 1.5rem;
+    font-weight: var(--fw-bold);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--color-text-chalk);
+    line-height: 1.2;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+.board-card-preview__default-tag {
+    font-family: var(--font-secondary);
+    font-size: 0.7em;
+    font-weight: normal;
+    opacity: 0.8;
+    margin-left: 0.4rem;
+    color: var(--color-text-light-gray);
+    vertical-align: middle;
+    text-shadow: none;
+}
+
+/* Lista Prodotti */
+.board-card-preview__products {
+    display: block;
+    opacity: 1;
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-top: 0.5rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+    padding-left: var(--spacing-base);
+    padding-right: 0;
+    margin-right: 0;
+}
+
+.board-card-preview__products::-webkit-scrollbar {
+    display: none;
+}
+
+.product-list-scrollable {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.product-item {
+    font-family: var(--font-secondary);
+    font-size: 0.95rem;
+    color: var(--color-text-light-gray);
+    padding: 0.1rem 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.product-item.purchased {
+    text-decoration: line-through;
+    color: var(--color-text-medium-gray);
+    opacity: 0.7;
+}
+
+.more-items-indicator {
+    font-style: italic;
+    opacity: 0.7;
+    text-align: center;
+    padding-top: 0.2rem;
+}
+
+.no-products-text {
+    font-family: var(--font-secondary);
+    font-size: var(--fs-sm);
+    color: var(--color-text-medium-gray);
+    font-style: italic;
+    text-align: center;
+    padding: var(--spacing-base) 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* Pulsante Dettagli */
+.board-card-preview__details-btn {
+    position: absolute;
+    bottom: var(--spacing-sm);
+    right: var(--spacing-sm);
+    background: rgba(50, 50, 50, 0.6);
+    color: var(--color-text-light-gray);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.8rem;
+    padding: 0;
+    z-index: 15;
+    opacity: 0;
+    transform: translateY(5px) scale(0.9);
+    transition: opacity 0.3s 0.1s ease-out, transform 0.3s 0.1s ease-out, background-color 0.2s ease-out, color 0.2s ease-out;
+}
+
+.board-card-preview__details-btn:hover {
+    /* ... (invariato) ... */
+}
+
+/* Placeholder (invariato) */
+.preview-loading,
+.preview-empty,
+.preview-error {
+    /* ... */
+}
+
+.preview-error {
+    /* ... */
+}
+
+/* === MEDIA QUERIES Preview (originali) === */
+@media (max-width: 768px) {
+    .preview-row-title {
+        font-size: 1.7rem;
+    }
+
+    .board-card-preview__title {
+        font-size: 1.3rem;
+    }
+
+    .product-item {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .preview-row-title {
+        font-size: 1.5rem;
+    }
+
+    .board-card-preview__title {
+        font-size: 1.2rem;
+    }
+
+    .product-item {
+        font-size: 0.85rem;
+    }
+
+    .board-card-preview__details-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+
+    .card-slide-wrapper {
+        padding: 0 0.3rem;
+    }
+
+    .slick-slider {
+        margin: 0 -0.3rem;
+    }
+}

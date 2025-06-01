@@ -1,0 +1,26 @@
+/* ==== ./components/GroupDashboard/Modals/InviteMembersModal.css ==== */
+/* frontend/src/components/GroupDashboard/Modals/InviteMembersModal.css */
+
+/* Stili specifici per la modale di invito membri, se necessari.
+   Si basa sugli stili modali generali e sui form. */
+
+/* Esempio: se vuoi differenziare le label in questa modale */
+/* .invite-members-modal .form-label { ... } */
+
+/* Bootstrap gestisce già gli stati :invalid */
+/* .invite-members-modal .form-control:invalid,
+.invite-members-modal .form-select:invalid { ... } */
+
+/* .invite-members-modal .invalid-feedback { ... } */
+
+/* Alert per errore API */
+.invite-members-modal .alert-danger {
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-small);
+    background-color: rgba(160, 82, 45, 0.1);
+    /* Sfondo rosso trasparente */
+    color: var(--color-accent-danger);
+    /* Testo rosso */
+    border-color: rgba(160, 82, 45, 0.3);
+    /* Bordo rosso trasparente */
+}

@@ -1,0 +1,327 @@
+/* ==== src/components/MainHeader/MainHeader.css (PRONTO) ==== */
+
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--spacing-lg);
+    /* Padding laterale maggiore */
+    background-color: var(--color-bg-dark);
+    /* Sfondo header scuro */
+    color: var(--color-text-light-gray);
+    /* Colore testo default figli */
+    position: sticky;
+    /* Fisso in alto */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1030;
+    /* Sopra contenuto, sotto modali/overlay */
+    box-shadow: var(--shadow-soft);
+    /* Ombra leggera */
+    height: 60px;
+    /* Altezza fissa standard */
+    border-bottom: 1px solid var(--color-border-dark);
+    /* Bordo inferiore scuro */
+}
+
+/* --- Logo --- */
+.main-header__logo a {
+    font-family: var(--font-primary);
+    /* Caveat */
+    color: var(--color-accent-primary);
+    /* Ocra */
+    font-weight: var(--fw-bold);
+    font-size: var(--fs-display);
+    /* Dimensione logo */
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+    text-shadow: var(--text-shadow-chalk);
+    /* Effetto gesso */
+    line-height: 1;
+    /* Evita spazio extra */
+    padding: 0.2rem 0;
+    /* Piccolo padding verticale se serve */
+}
+
+.main-header__logo a:hover {
+    color: var(--color-accent-primary-darker);
+}
+
+/* --- Navigazione --- */
+.main-header__nav {
+    display: flex;
+    align-items: center;
+    /* Allinea verticalmente i link */
+    gap: var(--spacing-sm);
+    /* Spazio tra link */
+    flex-grow: 1;
+    /* Occupa spazio centrale */
+    justify-content: center;
+    /* Centra i link */
+    height: 100%;
+    /* Occupa tutta altezza header */
+    overflow: hidden;
+    /* Nasconde contenuto se troppo stretto */
+}
+
+.main-header__nav-link {
+    font-family: var(--font-secondary);
+    /* Lato per UI */
+    font-size: var(--fs-ui);
+    font-weight: var(--fw-bold);
+    /* Lato Bold */
+    color: var(--color-text-light-gray);
+    /* Grigio chiaro */
+    text-decoration: none;
+    display: inline-flex;
+    /* Permette gap e allineamento icona */
+    align-items: center;
+    gap: var(--spacing-sm);
+    /* Spazio tra icona e testo */
+    padding: 0.5rem var(--spacing-md);
+    /* Padding link */
+    border-radius: var(--border-radius);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    height: calc(100% - 12px);
+    /* Leggermente meno dell'header per effetto visivo */
+    margin: 6px 0;
+    /* Spazio sopra/sotto per centrare */
+    border-bottom: 3px solid transparent;
+    /* Bordo inferiore trasparente per active */
+    white-space: nowrap;
+    /* Evita che il testo vada a capo */
+}
+
+.main-header__nav-link:hover {
+    color: var(--color-text-chalk);
+    /* Bianco gesso */
+    background-color: var(--color-bg-hover-subtle);
+    /* Sfondo hover leggero */
+    border-bottom-color: var(--color-accent-secondary);
+    /* Bordo grigio scuro su hover */
+}
+
+/* Stile per link attivo (classe aggiunta da NavLink) */
+.main-header__nav-link.active {
+    color: var(--color-accent-primary);
+    /* Colore ocra per link attivo */
+    background-color: transparent;
+    /* Nessun background su active */
+    border-bottom-color: var(--color-accent-primary);
+    /* Bordo ocra sotto */
+    font-weight: var(--fw-bold);
+    /* Mantiene grassetto */
+}
+
+.main-header__nav-link.active:hover {
+    background-color: var(--color-bg-hover-subtle);
+    /* Mantiene hover leggero anche se attivo */
+}
+
+.main-header__nav-icon {
+    font-size: 1.1em;
+    /* Icona leggermente più grande */
+    display: block;
+    /* Per evitare spazi extra */
+}
+
+.main-header__nav-text {
+    /* Il testo verrà nascosto con classi Bootstrap su mobile */
+}
+
+
+/* --- Azioni Utente --- */
+.main-header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    /* Spazio tra bottoni azioni */
+}
+
+/* Stile Bottoni Icona */
+.main-header__action-button {
+    background: none;
+    border: none;
+    color: var(--color-text-light-gray);
+    font-size: 1.3rem;
+    /* Dimensione icone azioni */
+    cursor: pointer;
+    padding: 0.6rem;
+    /* Padding bottone icona */
+    border-radius: 50%;
+    /* Bottone tondo */
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.1s ease;
+    position: relative;
+    /* Per badge */
+    line-height: 1;
+    /* Evita disallineamenti */
+    display: inline-flex;
+    /* Per allineare icona interna */
+    justify-content: center;
+    align-items: center;
+}
+
+.main-header__action-button:hover:not(:disabled) {
+    color: var(--color-text-chalk);
+    background-color: var(--color-bg-medium);
+    /* Sfondo hover */
+    transform: scale(1.1);
+    /* Leggero ingrandimento */
+}
+
+.main-header__action-button:active:not(:disabled) {
+    transform: scale(1);
+    /* Ritorna a dimensione normale su click */
+}
+
+.main-header__action-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Stile specifico bottone logout hover */
+.main-header__action-button.logout-button:hover {
+    color: var(--color-danger);
+    /* Rosso */
+    background-color: var(--color-danger-background);
+    /* Sfondo rosso trasparente */
+}
+
+/* Badge Notifiche */
+.main-header-badge {
+    position: absolute;
+    top: -3px;
+    /* Aggiustamenti posizione badge */
+    right: -3px;
+    background-color: var(--color-danger);
+    /* Rosso mattone */
+    color: var(--color-text-chalk);
+    /* Testo bianco */
+    font-family: var(--font-secondary);
+    /* Lato per numero */
+    font-size: 0.7rem;
+    /* Dimensione badge */
+    font-weight: bold;
+    padding: 0.1em 0.4em;
+    /* Padding badge */
+    border-radius: 50%;
+    line-height: 1;
+    min-width: 17px;
+    /* Dimensione minima */
+    min-height: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-bg-dark);
+    /* Bordo per staccare */
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    /* Piccola ombra badge */
+}
+
+/* Info Utente (Nome) */
+.main-header__user-info {
+    padding-left: var(--spacing-sm);
+    margin-left: var(--spacing-xs);
+    border-left: 1px solid var(--color-border-dark);
+    /* Separatore */
+    /* Visibilità gestita da classi Bootstrap nel JSX (d-none d-md-block) */
+}
+
+.main-header__username {
+    font-family: var(--font-secondary);
+    /* Lato */
+    color: var(--color-text-chalk);
+    /* Bianco gesso */
+    font-weight: var(--fw-bold);
+    /* Lato Bold */
+    font-size: var(--fs-ui);
+    padding-left: var(--spacing-sm);
+    /* Spazio dopo il separatore */
+    white-space: nowrap;
+    /* Evita che vada a capo */
+}
+
+/* --- Media Queries --- */
+@media (max-width: 992px) {
+
+    /* Nasconde testo link navigazione prima su tablet */
+    .main-header__nav-text {
+        display: none;
+    }
+
+    .main-header__nav {
+        gap: var(--spacing-xs);
+        /* Ancora meno spazio tra icone */
+    }
+
+    .main-header__nav-link {
+        padding: 0.5rem 0.7rem;
+        /* Meno padding orizzontale */
+    }
+}
+
+@media (max-width: 768px) {
+    .main-header {
+        padding: 0 var(--spacing-md);
+        /* Meno padding laterale header */
+        height: 55px;
+        /* Altezza ridotta header */
+    }
+
+    .main-header__logo a {
+        font-size: 2rem;
+        /* Logo leggermente più piccolo */
+    }
+
+    /* .main-header__user-info è già nascosto da Bootstrap */
+    .main-header__actions {
+        gap: var(--spacing-xs);
+        /* Meno spazio tra azioni */
+    }
+
+    .main-header__action-button {
+        font-size: 1.2rem;
+        padding: 0.5rem;
+    }
+
+    .main-header__badge {
+        min-width: 16px;
+        min-height: 16px;
+        font-size: 0.65rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-header {
+        height: 50px;
+        /* Header ancora più basso */
+        padding: 0 var(--spacing-sm);
+        /* Padding minimo */
+    }
+
+    .main-header__logo a {
+        font-size: 1.8rem;
+        /* Logo ancora più piccolo */
+    }
+
+    /* Nascondiamo anche i link di navigazione centrali su mobile stretto */
+    .main-header__nav {
+        display: none;
+    }
+
+    .main-header__action-button {
+        font-size: 1.1rem;
+        padding: 0.4rem;
+    }
+
+    .main-header-badge {
+        font-size: 0.6rem;
+        min-width: 14px;
+        min-height: 14px;
+        top: 0px;
+        right: 0px;
+        border-width: 0;
+        /* Rimuovi bordo badge piccolo */
+    }
+}

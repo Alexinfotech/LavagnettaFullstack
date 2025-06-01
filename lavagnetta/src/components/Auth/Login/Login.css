@@ -1,0 +1,294 @@
+/* ==== ./components/Auth/Login/Login.css (RISCRITTO e CORRETTO - Stili condivisi Auth) ==== */
+
+/* Container principale che centra la card */
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xl) 0;
+    /* Sfondo ereditato da body */
+}
+
+/* Card di autenticazione */
+#auth-card {
+    max-width: 420px;
+    width: 90%;
+    background-color: var(--color-bg-dark);
+    /* Sfondo card scuro */
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border-dark);
+    /* Bordo scuro sottile */
+}
+
+/* Titolo ("Accedi", "Crea Account") -> Caveat + Effetto Gesso */
+#auth-card h2 {
+    font-family: var(--font-primary) !important;
+    /* Forza Caveat */
+    color: var(--color-accent-primary);
+    /* Ocra */
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-lg);
+    font-weight: var(--fw-bold);
+    text-shadow: var(--text-shadow-chalk);
+    /* Effetto Gesso */
+}
+
+/* Form Group */
+#auth-card .form-group {
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+}
+
+/* Input Group */
+#auth-card .input-group {
+    position: relative;
+}
+
+/* Label -> Sans-serif */
+#auth-card .form-label {
+    font-family: var(--font-secondary);
+    /* Sans-serif */
+    font-size: var(--fs-sm);
+    color: var(--color-text-light-gray);
+    margin-bottom: var(--spacing-xs);
+    font-weight: 700;
+    /* Bold */
+    display: block;
+    text-align: left;
+}
+
+/* Input Fields -> Sans-serif */
+#auth-card .form-control {
+    font-family: var(--font-secondary) !important;
+    /* Forza Sans-serif */
+    padding-left: 2.8rem;
+    padding-right: 2.8rem;
+    height: calc(1.5em + 1.2rem + 2px);
+    font-size: var(--fs-ui);
+    /* Stili base (bg, color, border, focus) ereditati da index.css */
+}
+
+/* Icone nell'input */
+#auth-card .input-group-text {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    color: var(--color-text-medium-gray);
+    font-size: 1.1em;
+    z-index: 3;
+}
+
+#auth-card .input-group-text.icon-left {
+    left: 0;
+    padding-left: var(--spacing-md);
+    border-top-left-radius: var(--border-radius);
+    border-bottom-left-radius: var(--border-radius);
+}
+
+#auth-card .input-group-text.toggle-password {
+    right: 0;
+    padding-right: var(--spacing-md);
+    cursor: pointer;
+    transition: color 0.2s ease;
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+}
+
+#auth-card .input-group-text.toggle-password:hover {
+    color: var(--color-accent-primary);
+}
+
+/* Messaggio errore generale (Alert) -> Sans-serif */
+#auth-card .alert.error-message {
+    font-family: var(--font-secondary);
+    /* Sans-serif */
+    text-align: center;
+    font-size: var(--fs-sm);
+    /* Stili alert ereditati da index.css */
+}
+
+/* Testo errore specifico -> Sans-serif */
+#auth-card .text-danger {
+    font-family: var(--font-secondary);
+    /* Sans-serif */
+    color: var(--color-danger);
+    font-size: var(--fs-xs);
+    text-align: left;
+    margin-top: var(--spacing-xs);
+}
+
+/* Pulsante Submit -> Sans-serif */
+#auth-card .btn-warning.w-100 {
+    font-family: var(--font-secondary) !important;
+    /* FORZA Sans-serif */
+    font-size: var(--fs-ui);
+    /* Dimensione UI standard per bottoni */
+    font-weight: var(--fw-bold);
+    padding: 0.75rem 1rem;
+    /* Leggermente più alto */
+    letter-spacing: 0.5px;
+    margin-top: var(--spacing-md);
+    box-shadow: var(--shadow-sm);
+    text-transform: none;
+    /* Niente maiuscolo */
+    /* Colori e hover ereditati da .btn-primary in index.css */
+}
+
+#auth-card .btn-warning.w-100:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+#auth-card .btn-warning.w-100:active:not(:disabled) {
+    transform: translateY(0px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Testo link in basso -> Sans-serif */
+#auth-card p.bottom-text {
+    font-family: var(--font-secondary);
+    /* Sans-serif */
+    text-align: center;
+    margin-top: var(--spacing-lg);
+    font-size: var(--fs-sm);
+    color: var(--color-text-light-gray);
+}
+
+#auth-card p.bottom-text a {
+    font-family: var(--font-secondary) !important;
+    /* FORZA Sans-serif */
+    color: var(--color-accent-primary);
+    /* Ocra */
+    font-weight: var(--fw-bold);
+    /* Mantiene grassetto */
+    text-decoration: none;
+    margin-left: 5px;
+    font-size: 1em;
+    /* Stessa dimensione testo */
+    text-shadow: none;
+    /* Assicura no ombra */
+}
+
+#auth-card p.bottom-text a:hover {
+    color: var(--color-accent-primary-darker);
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    #auth-card {
+        padding: var(--spacing-lg);
+    }
+
+    #auth-card h2 {
+        font-size: 2rem;
+    }
+
+    #auth-card .form-control {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+    }
+
+    #auth-card .input-group-text.icon-left {
+        padding-left: var(--spacing-sm);
+    }
+
+    #auth-card .input-group-text.toggle-password {
+        padding-right: var(--spacing-sm);
+    }
+}
+
+/* ==== ./components/Auth/Login/Login.css (AGGIUNTE PER REQUISITI PASSWORD) ==== */
+
+/* Stili per il contenitore della lista requisiti */
+.password-requirements {
+    font-size: var(--fs-xs);
+    /* Usa dimensione piccola */
+    margin-top: calc(var(--spacing-xs) * -1 + 4px);
+    /* Tira su leggermente sotto l'input */
+    padding-left: var(--spacing-sm);
+    /* Leggero padding */
+    border-left: 3px solid var(--color-border-medium-gray);
+    /* Bordo laterale per separazione visiva */
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    /* Animazione entrata/uscita (opzionale) */
+    max-height: 200px;
+    /* Necessario per animazione */
+    overflow: hidden;
+    /* Necessario per animazione */
+}
+
+/* Nascondi per default se non si usa lo stato showPasswordRequirements */
+/* .password-requirements:not(.visible) {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    padding: 0 var(--spacing-sm);
+    border: none;
+} */
+
+.password-requirements ul {
+    list-style: none;
+    /* Rimuovi pallini */
+    padding: 0;
+    margin: 0;
+    margin-top: var(--spacing-xs);
+    /* Spazio dall'alto */
+}
+
+.password-requirements li {
+    margin-bottom: var(--spacing-xxs);
+    /* Spazio tra requisiti */
+    transition: color 0.3s ease;
+    /* Transizione colore */
+    display: flex;
+    /* Per allineare icona e testo */
+    align-items: center;
+}
+
+/* Stile base (non valido) */
+.password-requirements li.invalid {
+    color: var(--color-text-medium-gray);
+    /* Colore testo grigio/tenue */
+}
+
+.password-requirements li.invalid::before {
+    content: '✕';
+    /* Icona croce (o usa icon font/SVG) */
+    color: var(--color-danger);
+    /* Colore rosso */
+    font-weight: bold;
+    margin-right: var(--spacing-sm);
+    display: inline-block;
+    width: 1em;
+    /* Allinea le icone */
+    text-align: center;
+}
+
+/* Stile requisito valido */
+.password-requirements li.valid {
+    color: var(--color-text-default);
+    /* Colore testo normale o leggermente più scuro */
+}
+
+.password-requirements li.valid::before {
+    content: '✓';
+    /* Icona spunta (o usa icon font/SVG) */
+    color: var(--color-success);
+    /* Colore verde (assicurati sia definito) */
+    font-weight: bold;
+    margin-right: var(--spacing-sm);
+    display: inline-block;
+    width: 1em;
+    /* Allinea le icone */
+    text-align: center;
+}

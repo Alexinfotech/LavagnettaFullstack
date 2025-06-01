@@ -1,0 +1,582 @@
+/* ==== src/index.css (MODIFICATO per Responsive Font) ==== */
+
+/* Import Font Primario (Gesso/Titoli) */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap');
+/* Import Font Secondario (UI Leggibile) */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+:root {
+  /* --- COLOR PALETTE (invariata) --- */
+  --color-bg-deep-dark: #212529;
+  --color-bg-dark: #343a40;
+  --color-bg-medium: #495057;
+  --color-bg-hover-subtle: rgba(255, 255, 255, 0.05);
+  --color-bg-overlay-dark: rgba(25, 25, 28, 0.7);
+  --color-bg-overlay-darker-hover: rgba(15, 15, 18, 0.8);
+  --color-bg-light-contrast: #f8f9fa;
+
+  --color-text-chalk: #f8f9fa;
+  --color-text-light-gray: #adb5bd;
+  --color-text-medium-gray: #6c757d;
+  --color-text-dark-contrast: #212529;
+
+  --color-accent-primary: #ffc107;
+  --color-accent-primary-darker: #e0a800;
+  --color-accent-secondary: #4F545C;
+
+  --color-border-dark: var(--color-accent-secondary);
+  --color-border-medium: #495057;
+  --color-border-light: #dee2e6;
+
+  --color-danger: #A0522D;
+  --color-danger-hover: #8B4513;
+  --color-danger-background: rgba(160, 82, 45, 0.1);
+  --color-success: #6B8E23;
+  --color-success-hover: #556B2F;
+  --color-success-background: rgba(107, 142, 35, 0.1);
+  --color-info: #4682B4;
+  --color-info-hover: #41729F;
+  --color-info-background: rgba(70, 130, 180, 0.1);
+  --color-warning: var(--color-accent-primary);
+  --color-warning-hover: var(--color-accent-primary-darker);
+  --color-warning-background: rgba(255, 193, 7, 0.1);
+
+
+  /* --- Tipografia --- */
+  --font-primary: 'Caveat', cursive;
+  --font-secondary: 'Lato', sans-serif;
+
+  /* Dimensioni Font Default (desktop) */
+  --fs-base: 16px;
+  /* Riferimento (equivalente a 1rem di default) */
+  --fs-html: 100%;
+  /* Imposta font-size radice a 16px */
+  --fs-ui: 0.95rem;
+  /* 15.2px */
+  --fs-sm: 0.85rem;
+  /* 13.6px */
+  --fs-xs: 0.75rem;
+  /* 12px */
+  --fs-lg: 1.1rem;
+  /* 17.6px */
+  --fs-xl: 1.5rem;
+  /* 24px */
+  --fs-xxl: 2rem;
+  /* 32px */
+  --fs-display: 2.5rem;
+  /* 40px */
+
+  --fw-normal: 400;
+  --fw-bold: 700;
+  --text-shadow-chalk: 1px 1px 2px rgba(0, 0, 0, 0.4);
+
+  /* --- Layout & UI (invariate) --- */
+  --border-radius-sm: 4px;
+  --border-radius: 6px;
+  --border-radius-lg: 8px;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-base: 0.8rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --shadow-soft: 0 2px 5px rgba(0, 0, 0, 0.25);
+  --shadow-medium: 0 6px 12px rgba(0, 0, 0, 0.3);
+  --shadow-hard: 0 10px 20px rgba(0, 0, 0, 0.35);
+  --shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* === STILI GLOBALI RESET & BASE === */
+/* ==== src/index.css ==== */
+
+/* ... (altri stili) ... */
+
+/* === STILI GLOBALI RESET & BASE === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  /* AGGIUNTA: Prevenzione tap highlight */
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: var(--fs-html);
+  /* Imposta dimensione base */
+  /* AGGIUNTA: Impedisce lo scroll pull-to-refresh/rimbalzo su mobile */
+  overscroll-behavior-y: contain;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-secondary);
+  font-size: 1rem;
+  /* Usa 1rem (che ora è 16px o meno, vedi @media) */
+  font-weight: var(--fw-normal);
+  line-height: 1.6;
+  background-color: var(--color-bg-deep-dark);
+  color: var(--color-text-light-gray);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* AGGIUNTA: Assicura che il body non sia scrollabile di suo */
+  overflow: hidden;
+  /* Aggiunto per sicurezza, l'overflow dovrebbe essere gestito dai wrapper interni */
+  overscroll-behavior-y: contain;
+  /* Doppia sicurezza per alcuni browser */
+}
+
+/* ... (resto invariato) ... */
+
+/* === ELEMENTI HTML DI BASE === */
+a {
+  /* (invariato) */
+}
+
+a:hover {
+  /* (invariato) */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-primary);
+  font-weight: var(--fw-bold);
+  line-height: 1.3;
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-chalk);
+}
+
+h1 {
+  font-size: var(--fs-display);
+}
+
+h2 {
+  font-size: var(--fs-xxl);
+}
+
+h3 {
+  font-size: var(--fs-xl);
+}
+
+h4 {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+}
+
+h5 {
+  font-size: 1rem;
+  font-weight: var(--fw-bold);
+}
+
+/* Usa 1rem */
+h6 {
+  font-size: var(--fs-ui);
+  font-weight: var(--fw-bold);
+}
+
+p,
+li,
+label,
+span,
+div {
+  /* (invariato) */
+}
+
+p {
+  /* (invariato) */
+}
+
+ul,
+ol {
+  /* (invariato) */
+}
+
+li {
+  /* (invariato) */
+}
+
+/* Classi helper (invariate) */
+.font-primary {
+  /* ... */
+}
+
+.font-secondary {
+  /* ... */
+}
+
+.text-chalk {
+  /* ... */
+}
+
+.text-light-gray {
+  /* ... */
+}
+
+.text-medium-gray {
+  /* ... */
+}
+
+.text-accent {
+  /* ... */
+}
+
+.text-shadow-chalk {
+  /* ... */
+}
+
+/* === ELEMENTI FORM (Pulizia e uso di rem) === */
+label,
+.form-label {
+  font-family: var(--font-secondary);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-ui);
+  /* Usa variabile */
+  color: var(--color-text-light-gray);
+  margin-bottom: var(--spacing-xs);
+  display: block;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="number"],
+textarea,
+select,
+.form-control,
+.form-select {
+  font-family: var(--font-secondary);
+  font-size: var(--fs-ui);
+  /* Usa variabile */
+  display: block;
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  /* Valori in rem per scalare con font */
+  font-weight: var(--fw-normal);
+  line-height: 1.5;
+  color: var(--color-text-chalk);
+  background-color: var(--color-bg-medium);
+  background-clip: padding-box;
+  border: 1px solid var(--color-border-dark);
+  appearance: none;
+  border-radius: var(--border-radius);
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  box-shadow: var(--shadow-inset);
+}
+
+input::placeholder,
+textarea::placeholder {
+  /* (invariato) */
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+.form-control:focus,
+.form-select:focus {
+  /* (invariato) */
+}
+
+.form-select {
+  /* (invariato, background-image usa stroke fisso ma va bene) */
+}
+
+.form-select:disabled {
+  /* (invariato) */
+}
+
+.form-control.is-invalid,
+.form-select.is-invalid {
+  /* (invariato) */
+}
+
+.invalid-feedback {
+  /* (invariato) */
+}
+
+.form-control.is-invalid~.invalid-feedback,
+.form-select.is-invalid~.invalid-feedback {
+  /* (invariato) */
+}
+
+.form-control.is-valid,
+.form-select.is-valid {
+  /* (invariato) */
+}
+
+/* === BOTTONI (Pulizia e uso rem) === */
+button,
+.btn {
+  font-family: var(--font-secondary);
+  font-size: var(--fs-ui);
+  /* Usa variabile */
+  font-weight: var(--fw-bold);
+  line-height: 1.5;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  padding: 0.6rem 1rem;
+  /* Valori in rem */
+  border: 1px solid transparent;
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  box-shadow: var(--shadow-soft);
+}
+
+button:focus,
+.btn:focus {
+  /* (invariato) */
+}
+
+button:active,
+.btn:active {
+  /* (invariato) */
+}
+
+button:disabled,
+.btn:disabled {
+  /* (invariato) */
+}
+
+/* Bottoni Bootstrap (Tutti invariati negli stili specifici colore/hover) */
+.btn-primary {
+  /* ... */
+}
+
+.btn-primary:hover:not(:disabled) {
+  /* ... */
+}
+
+.btn-secondary {
+  /* ... */
+}
+
+/* ... (tutti gli altri .btn-* e .btn-outline-*) ... */
+.btn-link {
+  /* ... */
+}
+
+/* === COMPONENTI BOOTSTRAP (Uso rem e variabili) === */
+.card {
+  background-color: var(--color-bg-dark);
+  border: 1px solid var(--color-border-dark);
+  color: var(--color-text-light-gray);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-secondary);
+  margin-bottom: var(--spacing-md);
+  /* Usa variabile */
+}
+
+.card-header {
+  padding: var(--spacing-base) var(--spacing-md);
+  /* Usa variabili */
+  background-color: var(--color-bg-medium);
+  border-bottom: 1px solid var(--color-border-dark);
+  font-family: var(--font-primary);
+  font-size: var(--fs-lg);
+  /* Usa variabile */
+  font-weight: var(--fw-bold);
+  color: var(--color-text-chalk);
+}
+
+.card-header:first-child {
+  /* (invariato) */
+}
+
+.card-body {
+  padding: var(--spacing-md);
+  /* Usa variabile */
+}
+
+.card-footer {
+  padding: var(--spacing-base) var(--spacing-md);
+  /* Usa variabili */
+  background-color: var(--color-bg-medium);
+  border-top: 1px solid var(--color-border-dark);
+}
+
+.card-footer:last-child {
+  /* (invariato) */
+}
+
+.card-title {
+  font-family: var(--font-primary);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-xl);
+  /* Usa variabile */
+  color: var(--color-text-chalk);
+  margin-bottom: var(--spacing-base);
+  /* Usa variabile */
+}
+
+.modal-content {
+  /* (invariato) */
+}
+
+.modal-header {
+  /* (invariato) */
+}
+
+.modal-header .btn-close {
+  /* (invariato) */
+}
+
+.modal-header .btn-close:hover {
+  /* (invariato) */
+}
+
+.modal-title {
+  font-size: var(--fs-xl);
+  /* Usa variabile */
+}
+
+.modal-body {
+  padding: var(--spacing-lg);
+  /* Usa variabile */
+}
+
+.modal-footer {
+  padding: var(--spacing-md);
+  gap: var(--spacing-sm);
+  /* Usa variabili */
+}
+
+.badge {
+  /* (invariato) */
+}
+
+.badge.bg-primary {
+  /* (invariato) */
+}
+
+/* ... (tutti gli altri .badge.bg-*) ... */
+
+.alert {
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  /* Usa variabili */
+}
+
+.alert-heading {
+  margin-bottom: var(--spacing-sm);
+  /* Usa variabile */
+}
+
+.alert-link {
+  /* (invariato) */
+}
+
+.alert-primary {
+  /* (invariato) */
+}
+
+/* ... (tutti gli altri .alert-*) ... */
+
+/* === UTILITIES (invariate) === */
+/* Scrollbar */
+body::-webkit-scrollbar {
+  /* ... */
+}
+
+body::-webkit-scrollbar-track {
+  /* ... */
+}
+
+body::-webkit-scrollbar-thumb {
+  /* ... */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  /* ... */
+}
+
+/* Toastify */
+.Toastify__toast {
+  /* ... */
+}
+
+.Toastify__toast-body {
+  /* ... */
+}
+
+.Toastify__close-button {
+  /* ... */
+}
+
+.Toastify__close-button:hover {
+  /* ... */
+}
+
+.Toastify__progress-bar {
+  /* ... */
+}
+
+.Toastify__toast--success {
+  /* ... */
+}
+
+.Toastify__toast--warning {
+  /* ... */
+}
+
+.Toastify__toast--error {
+  /* ... */
+}
+
+/* Icone */
+.react-icon {
+  /* ... */
+}
+
+/* === MEDIA QUERY per Font Size Responsive === */
+@media (max-width: 768px) {
+  :root {
+    /* Riduci leggermente la base del font su tablet */
+    --fs-html: 93.75%;
+    /* 15px base (16 * 0.9375) */
+    /* Le altre variabili rem si adatteranno di conseguenza */
+    --fs-display: 2.2rem;
+    /* Riduci titoli grandi */
+    --fs-xxl: 1.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  :root {
+    /* Riduci ulteriormente la base del font su mobile */
+    --fs-html: 87.5%;
+    /* 14px base (16 * 0.875) */
+    /* Le altre variabili rem si adatteranno */
+    --fs-display: 2rem;
+    /* Riduci ancora titoli grandi */
+    --fs-xxl: 1.6rem;
+    --fs-xl: 1.3rem;
+  }
+
+  /* Riduci ulteriormente padding bottoni su mobile */
+  button,
+  .btn {
+    padding: 0.5rem 0.8rem;
+  }
+
+  /* Riduci padding input su mobile */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="date"],
+  input[type="number"],
+  textarea,
+  select,
+  .form-control,
+  .form-select {
+    padding: 0.5rem 0.7rem;
+  }
+}
+
+/* dopo ultimo*/

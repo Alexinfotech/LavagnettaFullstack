@@ -1,0 +1,242 @@
+/* ==== src/components/GroupDashboard/Members/MembersList.css (PRONTO) ==== */
+
+/* Contenitore Lista (div) */
+.members-list-container {
+  /* Eredita sfondo dalla card-body (p-0) */
+}
+
+/* Singolo Item Membro (riga) */
+.member-item {
+  display: flex;
+  align-items: center;
+  /* Allinea verticalmente */
+  justify-content: space-between;
+  /* Spazio tra info e azioni */
+  padding: var(--spacing-base) var(--spacing-md);
+  /* Padding interno */
+  border-bottom: 1px solid var(--color-border-dark);
+  /* Separatore scuro */
+  transition: background-color 0.15s ease-in-out;
+}
+
+.member-item:last-child {
+  border-bottom: none;
+  /* No bordo ultimo item */
+}
+
+.member-item:hover {
+  background-color: var(--color-bg-hover-subtle);
+  /* Hover leggero */
+}
+
+/* Stile per utente corrente */
+.member-item--current-user {
+  /* background-color: rgba(255, 193, 7, 0.05); */
+  /* Leggero sfondo ocra? Opzionale */
+  /* border-left: 3px solid var(--color-accent-primary); */
+  /* Bordo ocra a sinistra? Opzionale */
+  /* padding-left: calc(var(--spacing-md) - 3px); */
+  /* Compensa bordo */
+}
+
+/* Stile per item con errore */
+.member-item--error {
+  background-color: var(--color-danger-background);
+  /* Sfondo rosso tenue */
+  border-left: 3px solid var(--color-danger);
+  /* Bordo rosso */
+  padding-left: calc(var(--spacing-md) - 3px);
+}
+
+
+/* Sezione Info Membro (Icona, Testo) */
+.member-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-base);
+  flex-grow: 1;
+  /* Occupa spazio */
+  min-width: 0;
+  /* Permette restringimento */
+  margin-right: var(--spacing-md);
+  /* Spazio dalle azioni */
+}
+
+/* Contenitore Icona Ruolo */
+.role-icon-container {
+  flex-shrink: 0;
+  /* Non si restringe */
+}
+
+.role-icon {
+  font-size: 1.6rem;
+  /* Dimensione icona */
+  vertical-align: middle;
+}
+
+/* Colori Icone Ruolo */
+.role-icon--admin {
+  color: var(--color-accent-primary);
+}
+
+.role-icon--level1 {
+  color: var(--color-info);
+}
+
+.role-icon--level2 {
+  color: var(--color-text-medium-gray);
+}
+
+
+/* Contenitore Testi (Nome, Email, Tag) */
+.member-details {
+  display: flex;
+  flex-direction: column;
+  /* Nome sopra email */
+  min-width: 0;
+  /* Permette troncamento */
+}
+
+/* Nome Membro (Caveat) */
+.member-name {
+  /* font-family da classe JSX */
+  font-weight: var(--fw-bold);
+  font-size: 1.3rem;
+  color: var(--color-text-chalk);
+  /* Bianco gesso */
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Tag (Tu) */
+.you-tag {
+  /* font-family da classe JSX */
+  font-size: 0.8em;
+  font-style: italic;
+  color: var(--color-accent-primary);
+  /* Ocra */
+  margin-left: 0.4em;
+  font-weight: normal;
+}
+
+/* Email Membro (Lato) */
+.member-email {
+  /* font-family da classe JSX */
+  font-size: var(--fs-sm);
+  color: var(--color-text-medium-gray);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Tag Creatore (Lato) */
+.creator-tag {
+  /* font-family da classe JSX */
+  font-size: var(--fs-xs);
+  font-weight: bold;
+  color: var(--color-text-dark-contrast);
+  background-color: var(--color-accent-secondary);
+  /* Sfondo grigio scuro */
+  padding: 0.15em 0.5em;
+  border-radius: var(--border-radius-sm);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+
+/* Sezione Azioni Membro (Select, Badge, Spinner, Icona Errore) */
+.member-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  /* Spazio tra elementi azioni */
+  flex-shrink: 0;
+  /* Non si restringe */
+}
+
+/* Spinner e Icona Errore (piccoli) */
+.action-spinner.spinner-border-sm {
+  color: var(--color-accent-primary);
+  /* Spinner Ocra */
+  width: 1rem;
+  /* Dimensione ridotta */
+  height: 1rem;
+  border-width: 0.15em;
+}
+
+.action-error-icon {
+  color: var(--color-danger);
+  /* Icona errore rossa */
+  font-size: 1.1rem;
+}
+
+/* Select Cambio Ruolo */
+.role-select.form-select-sm {
+  /* font-family da classe JSX */
+  font-size: var(--fs-sm);
+  /* Dimensione testo ridotta */
+  padding-top: 0.2rem;
+  /* Padding verticale ridotto */
+  padding-bottom: 0.2rem;
+  padding-right: 1.7rem;
+  /* Spazio per freccia */
+  line-height: 1.4;
+  width: auto;
+  /* Larghezza auto */
+  max-width: 130px;
+  /* Limita larghezza */
+  color: var(--color-text-light-gray);
+  background-color: var(--color-bg-medium);
+  border-color: var(--color-border-dark);
+  border-radius: var(--border-radius-sm);
+  /* Freccia custom (come in index.css ma adattata) */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23adb5bd' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  appearance: none;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.role-select.form-select-sm:focus {
+  border-color: var(--color-accent-primary);
+  box-shadow: 0 0 0 .15rem rgba(255, 193, 7, 0.35);
+  /* Focus più piccolo */
+  outline: 0;
+}
+
+.role-select.form-select-sm:disabled {
+  background-color: var(--color-bg-dark);
+  opacity: 0.6;
+}
+
+/* Badge Ruolo (quando non modificabile) */
+.member-role-badge.badge {
+  /* font-family da classe JSX */
+  font-weight: 500;
+  font-size: var(--fs-sm);
+  color: var(--color-text-dark-contrast);
+  /* Testo scuro */
+  padding: 0.35em 0.7em;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: var(--border-radius-sm);
+  /* Colore sfondo basato sul ruolo */
+}
+
+/* Colori specifici badge ruolo */
+.member-role-badge[title="Admin"] {
+  background-color: var(--color-accent-primary) !important;
+}
+
+.member-role-badge[title="Editor"] {
+  background-color: var(--color-info) !important;
+  color: var(--color-text-chalk) !important;
+}
+
+.member-role-badge[title="Contributor"] {
+  background-color: var(--color-accent-secondary) !important;
+  color: var(--color-text-light-gray) !important;
+}

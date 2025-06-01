@@ -1,0 +1,356 @@
+/* ==== ./components/GroupDashboard/GroupDashboard.css (MODIFICATO per Grid Responsive) ==== */
+
+/* Contenitore principale pagina */
+.group-dashboard-container {
+    min-height: calc(100vh - 60px);
+    /* Altezza minima meno header */
+    display: flex;
+    flex-direction: column;
+    /* Padding gestito da .content-wrapper.scrollable-content in App.css */
+}
+
+/* Header della pagina */
+.group-dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    margin-bottom: var(--responsive-padding-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border-dark);
+    flex-wrap: wrap;
+    /* Permette di andare a capo su mobile */
+}
+
+/* Titolo Pagina (h1) */
+.group-dashboard-header h1 {
+    color: var(--color-text-chalk);
+    margin: 0;
+    font-size: 2.2rem;
+    font-weight: var(--fw-bold);
+    flex-grow: 1;
+    line-height: 1.2;
+    order: 2;
+    /* Ordine di default (centrale) */
+    text-align: left;
+    /* Default sinistra */
+    font-family: var(--font-primary);
+    text-shadow: var(--text-shadow-chalk);
+    white-space: nowrap;
+    /* Evita a capo titolo */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    /* Permette restringimento */
+}
+
+/* Bottoni Icona Header */
+.btn-icon-header {
+    background: none;
+    border: none;
+    color: var(--color-text-light-gray);
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 0.6rem;
+    border-radius: 50%;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    line-height: 1;
+    position: relative;
+    flex-shrink: 0;
+    /* Non si restringe */
+}
+
+.btn-icon-header:hover {
+    color: var(--color-text-chalk);
+    background-color: var(--color-bg-medium);
+}
+
+/* Bottone Home specificamente a sinistra */
+.group-dashboard-header>.btn-icon-header:first-child {
+    order: 1;
+    margin-right: var(--spacing-sm);
+    /* Spazio tra Home e Titolo */
+}
+
+/* Azioni Header (Contenitore Pulsanti Destra) */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-base);
+    flex-shrink: 0;
+    order: 3;
+    /* A destra */
+    margin-left: var(--spacing-sm);
+    /* Spazio tra Titolo e Azioni */
+}
+
+/* Badge Notifiche (usa stile globale di MainHeader.css) */
+.notification-badge {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    background-color: var(--color-danger);
+    color: var(--color-text-chalk);
+    font-family: var(--font-secondary);
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 0.1em 0.4em;
+    border-radius: 50%;
+    line-height: 1;
+    min-width: 17px;
+    min-height: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-bg-dark);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Pulsante Crea Gruppo */
+.create-group-button.btn {
+    /* Applica stile btn generale */
+    font-family: var(--font-secondary);
+    /* Usa font secondario */
+    font-size: var(--fs-ui);
+    /* Dimensione standard UI */
+    padding: 0.5rem 1rem;
+    /* Padding standard bottone */
+    line-height: 1.5;
+    /* Colori ereditati da .btn-primary in index.css */
+}
+
+.create-group-button svg {
+    vertical-align: text-bottom;
+    font-size: 1em;
+}
+
+/* Allinea icona */
+
+/* Accordion Legenda */
+.permissions-legend-accordion .accordion-button {
+    /* Header Accordion */
+    font-family: var(--font-secondary);
+    font-weight: var(--fw-semibold);
+    font-size: 1.1rem;
+    color: var(--color-text-light-gray);
+    /* Colore testo collassato */
+    background-color: var(--color-bg-medium);
+    /* Sfondo header accordion */
+    box-shadow: none !important;
+    /* Rimuovi ombra default */
+    border-radius: var(--border-radius) !important;
+    /* Arrotonda header */
+    margin-bottom: -1px;
+    /* Sovrapponi bordo */
+}
+
+.permissions-legend-accordion .accordion-button:not(.collapsed) {
+    /* Header Espanso */
+    color: var(--color-accent-primary);
+    background-color: var(--color-bg-dark);
+    /* Sfondo più scuro quando aperto */
+    border-bottom: 1px solid var(--color-border-dark) !important;
+    /* Bordo sotto quando aperto */
+    border-bottom-left-radius: 0 !important;
+    /* No arrotondamento sotto sx */
+    border-bottom-right-radius: 0 !important;
+    /* No arrotondamento sotto dx */
+}
+
+.permissions-legend-accordion .accordion-button:focus {
+    border-color: var(--color-accent-primary);
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.35) !important;
+    /* Focus ocra */
+}
+
+/* Freccia Accordion */
+.permissions-legend-accordion .accordion-button::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23adb5bd'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    /* Icona grigia */
+}
+
+.permissions-legend-accordion .accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffc107'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    /* Icona ocra quando aperto */
+}
+
+/* Corpo Accordion */
+.permissions-legend-accordion .accordion-body {
+    padding: var(--spacing-lg);
+    /* Buon padding */
+    background-color: var(--color-bg-dark);
+    /* Sfondo scuro */
+    border: 1px solid var(--color-border-dark);
+    border-top: none;
+    /* Rimuovi bordo sopra (già presente sotto header) */
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    /* Arrotonda solo sotto */
+}
+
+/* Contenuto: Griglia o Placeholder */
+.groups-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.loading-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.no-groups-message {
+    text-align: center;
+    color: var(--color-text-medium-gray);
+    font-size: 1.5rem;
+    margin: auto;
+    padding: var(--spacing-xl);
+    background-color: var(--color-bg-dark);
+    border-radius: var(--border-radius);
+    max-width: 90%;
+    width: 500px;
+}
+
+.no-groups-message p {
+    margin: 0 0 var(--spacing-base) 0;
+    font-family: var(--font-primary);
+}
+
+.no-groups-message .btn-success svg {
+    vertical-align: text-bottom;
+}
+
+/* Griglia Gruppi */
+.groups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--responsive-padding-md);
+    padding: var(--spacing-base) 0;
+}
+
+/* --- Responsive GroupDashboard --- */
+@media (max-width: 768px) {
+    .group-dashboard-header h1 {
+        font-size: 1.8rem;
+        text-align: center;
+        width: 100%;
+        margin-bottom: var(--spacing-base);
+        order: 2;
+    }
+
+    .group-dashboard-header {
+        justify-content: space-between;
+    }
+
+    .groups-grid {
+        /* *** MODIFICA QUI: Riduci minmax per sicurezza *** */
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: var(--responsive-padding-sm);
+    }
+
+    .btn-icon-header {
+        font-size: 1.3rem;
+        padding: 0.5rem;
+    }
+
+    .create-group-button.btn {
+        font-size: 1rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .header-actions {
+        gap: var(--spacing-sm);
+    }
+
+    /* Riduci gap azioni su tablet */
+}
+
+@media (max-width: 576px) {
+    .group-dashboard-header h1 {
+        font-size: 1.6rem;
+    }
+
+    .groups-grid {
+        grid-template-columns: 1fr;
+        gap: var(--responsive-padding-md);
+    }
+
+    .btn-icon-header {
+        font-size: 1.2rem;
+    }
+
+    .create-group-button.btn {
+        font-size: 0.95rem;
+        padding: 0.35rem 0.7rem;
+    }
+
+    /* Riduci ancora bottone crea */
+    .header-actions {
+        gap: var(--spacing-xs);
+    }
+
+    /* Gap minimo azioni */
+    .no-groups-message {
+        width: 95%;
+        font-size: 1.3rem;
+        padding: var(--spacing-lg);
+    }
+
+    .permissions-legend-accordion .accordion-button {
+        font-size: 1rem;
+    }
+
+    /* Riduci testo header legenda */
+}
+
+/* Stili Modale Legenda (Se non in un CSS globale) */
+.permission-legend-modal .modal-content {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-chalk);
+    border: 1px solid var(--color-border-dark);
+    border-radius: var(--border-radius-lg);
+}
+
+.permission-legend-modal .modal-header {
+    background-color: var(--color-bg-medium);
+    border-bottom: 1px solid var(--color-border-dark);
+    padding: var(--spacing-md) var(--spacing-lg);
+}
+
+.permission-legend-modal .modal-header .modal-title {
+    color: var(--color-text-chalk);
+    font-family: var(--font-primary);
+    font-weight: var(--fw-bold);
+}
+
+.permission-legend-modal .modal-header .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.permission-legend-modal .modal-header .btn-close:hover {
+    opacity: 0.8;
+}
+
+.permission-legend-modal .modal-body {
+    padding: var(--spacing-lg);
+}
+
+.permission-legend-modal .modal-footer {
+    background-color: var(--color-bg-medium);
+    border-top: 1px solid var(--color-border-dark);
+    padding: var(--spacing-md) var(--spacing-lg);
+}
+
+.permission-legend-modal .modal-footer .btn-secondary {
+    background-color: var(--color-bg-darker);
+    border-color: var(--color-border-medium);
+    color: var(--color-text-light-gray);
+}
+
+.permission-legend-modal .modal-footer .btn-secondary:hover {
+    background-color: var(--color-bg-medium);
+    border-color: var(--color-border-light);
+    color: var(--color-text-chalk);
+}

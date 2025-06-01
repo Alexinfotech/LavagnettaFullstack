@@ -1,0 +1,13 @@
+
+// ...existing code...
+
+const YourComponent = () => {
+    // ...existing code...
+    return (
+        // ...existing code...
+        <img src="/default-background.jpg" alt="Background" />
+        // ...existing code...
+    );
+};
+
+export default YourComponent;

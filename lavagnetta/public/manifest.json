@@ -1,0 +1,37 @@
+{
+    "short_name": "Lavagna",
+    "name": "Lavagna PWA",
+    "description": "Applicazione per aver sempre con te la tua lavagnetta di casa, in modalità privata che condivisa con chi vuoi te.",
+    "icons": [
+        {
+            "src": "icons/icon-192x192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "icons/icon-512x512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#000000",
+    "background_color": "#ffffff",
+    "screenshots": [
+        {
+            "src": "screenshots/screenshot-desktop.png",
+            "sizes": "1280x720",
+            "type": "image/png",
+            "form_factor": "wide",
+            "label": "Vista principale su desktop"
+        },
+        {
+            "src": "screenshots/screenshot-mobile.png",
+            "sizes": "750x1334",
+            "type": "image/png",
+            "form_factor": "narrow",
+            "label": "Vista principale su mobile"
+        }
+    ]
+}

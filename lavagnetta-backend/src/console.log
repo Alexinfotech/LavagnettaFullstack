@@ -1,0 +1,11 @@
+const createThread = async () => {
+    try {
+        console.log('Invio richiesta di creazione thread con intestazioni:', client.defaults.headers);
+        const response = await client.post('/threads', {}); // Assicurati di inviare il corpo richiesto
+        console.log('Risposta creazione thread:', response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Errore nella creazione del Thread:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+};

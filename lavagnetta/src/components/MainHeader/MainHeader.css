@@ -1,0 +1,344 @@
+/* ==== src/components/MainHeader/MainHeader.css (Riscritto con Modifiche Responsive) ==== */
+
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--spacing-lg);
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-light-gray);
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1030;
+    box-shadow: var(--shadow-soft);
+    height: 60px;
+    /* Altezza fissa standard */
+    border-bottom: 1px solid var(--color-border-dark);
+    /* AGGIUNTA: Contenimento flex per riorganizzazione mobile */
+    gap: var(--spacing-sm);
+    /* Spazio minimo tra sezioni logo/nav/actions */
+}
+
+/* --- Logo --- */
+.main-header__logo {
+    flex-shrink: 0;
+    /* Non si restringe troppo */
+}
+
+.main-header__logo a {
+    font-family: var(--font-primary);
+    color: var(--color-accent-primary);
+    font-weight: var(--fw-bold);
+    font-size: var(--fs-display);
+    /* Dimensione logo */
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+    text-shadow: var(--text-shadow-chalk);
+    line-height: 1;
+    padding: 0.2rem 0;
+}
+
+.main-header__logo a:hover {
+    color: var(--color-accent-primary-darker);
+}
+
+/* --- Navigazione --- */
+.main-header__nav {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    /* MODIFICA: Permette restringimento ma non scomparsa completa subito */
+    flex-shrink: 1;
+    justify-content: center;
+    /* Centra i link rimasti */
+    height: 100%;
+    overflow: hidden;
+    /* Mantiene overflow per sicurezza */
+}
+
+.main-header__nav-link {
+    font-family: var(--font-secondary);
+    font-size: var(--fs-ui);
+    font-weight: var(--fw-bold);
+    color: var(--color-text-light-gray);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 0.5rem var(--spacing-md);
+    /* Padding link */
+    border-radius: var(--border-radius);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    height: calc(100% - 12px);
+    margin: 6px 0;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    flex-shrink: 0;
+    /* I link non si restringono singolarmente */
+}
+
+.main-header__nav-link:hover {
+    color: var(--color-text-chalk);
+    background-color: var(--color-bg-hover-subtle);
+    border-bottom-color: var(--color-accent-secondary);
+}
+
+.main-header__nav-link.active {
+    color: var(--color-accent-primary);
+    background-color: transparent;
+    border-bottom-color: var(--color-accent-primary);
+    font-weight: var(--fw-bold);
+}
+
+.main-header__nav-link.active:hover {
+    background-color: var(--color-bg-hover-subtle);
+}
+
+.main-header__nav-icon {
+    font-size: 1.1em;
+    display: block;
+}
+
+.main-header__nav-text {
+    /* Visibilità gestita nelle media query */
+}
+
+
+/* --- Azioni Utente --- */
+.main-header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    flex-shrink: 0;
+    /* Non si restringe */
+}
+
+/* Stile Bottoni Icona */
+.main-header__action-button {
+    background: none;
+    border: none;
+    color: var(--color-text-light-gray);
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 0.6rem;
+    border-radius: 50%;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.1s ease;
+    position: relative;
+    line-height: 1;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-header__action-button:hover:not(:disabled) {
+    color: var(--color-text-chalk);
+    background-color: var(--color-bg-medium);
+    transform: scale(1.1);
+}
+
+.main-header__action-button:active:not(:disabled) {
+    transform: scale(1);
+}
+
+.main-header__action-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.main-header__action-button.logout-button:hover {
+    color: var(--color-danger);
+    background-color: var(--color-danger-background);
+}
+
+/* Badge Notifiche */
+.main-header-badge {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    background-color: var(--color-danger);
+    color: var(--color-text-chalk);
+    font-family: var(--font-secondary);
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 0.1em 0.4em;
+    border-radius: 50%;
+    line-height: 1;
+    min-width: 17px;
+    min-height: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-bg-dark);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Info Utente (Nome) */
+.main-header__user-info {
+    /* Visibilità gestita nelle media query */
+    padding-left: var(--spacing-sm);
+    margin-left: var(--spacing-xs);
+    border-left: 1px solid var(--color-border-dark);
+}
+
+.main-header__username {
+    font-family: var(--font-secondary);
+    color: var(--color-text-chalk);
+    font-weight: var(--fw-bold);
+    font-size: var(--fs-ui);
+    padding-left: var(--spacing-sm);
+    white-space: nowrap;
+}
+
+
+/* --- Media Queries --- */
+
+/* Tablet (992px) */
+@media (max-width: 992px) {
+    .main-header {
+        padding: 0 var(--spacing-md);
+        /* Riduci padding */
+        gap: var(--spacing-xs);
+        /* Meno spazio tra sezioni */
+    }
+
+    .main-header__logo a {
+        font-size: 2.2rem;
+        /* Riduci logo */
+    }
+
+    /* Nascondi solo il TESTO dei link di navigazione */
+    .main-header__nav-text {
+        display: none;
+    }
+
+    .main-header__nav {
+        gap: var(--spacing-xs);
+        /* Meno spazio tra le icone di navigazione */
+    }
+
+    .main-header__nav-link {
+        padding: 0.5rem 0.7rem;
+        /* Meno padding per le icone di navigazione */
+    }
+
+    /* Nascondi separatore username e riduci spazio/dimensione */
+    .main-header__user-info {
+        border-left: none;
+        margin-left: 0;
+        padding-left: 0;
+    }
+
+    .main-header__username {
+        padding-left: 0;
+        font-size: var(--fs-sm);
+        /* Riduci un po' username */
+    }
+}
+
+/* Mobile (768px) */
+@media (max-width: 768px) {
+    .main-header {
+        height: 55px;
+        /* Altezza ridotta header */
+    }
+
+    .main-header__logo a {
+        font-size: 2rem;
+        /* Logo ancora più piccolo */
+    }
+
+    /* Riduci ulteriormente il gap tra le icone di navigazione */
+    .main-header__nav {
+        gap: 0;
+    }
+
+    /* Riduci padding icone di navigazione */
+    .main-header__nav-link {
+        padding: 0.4rem 0.5rem;
+        /* Padding minimo icone */
+    }
+
+    /* Riduci gap azioni utente */
+    .main-header__actions {
+        gap: var(--spacing-xs);
+    }
+
+    /* Riduci icone azioni utente */
+    .main-header__action-button {
+        font-size: 1.2rem;
+        padding: 0.5rem;
+    }
+
+
+
+    /* Riduci badge notifiche */
+    .main-header-badge {
+        min-width: 16px;
+        min-height: 16px;
+        font-size: 0.65rem;
+        top: -2px;
+        /* Aggiusta posizione */
+        right: -2px;
+    }
+}
+
+/* Mobile Stretto (480px) */
+@media (max-width: 480px) {
+    .main-header {
+        height: 50px;
+        /* Header ancora più basso */
+        padding: 0 var(--spacing-sm);
+        /* Padding minimo */
+    }
+
+    .main-header__logo a {
+        font-size: 1.8rem;
+        /* Logo minimo */
+    }
+
+
+
+    /* Il gap tra le azioni è già piccolo */
+    .main-header__actions {
+        /* gap: var(--spacing-xs); già impostato */
+    }
+
+    /* Riduci ulteriormente icone azioni */
+    .main-header__action-button {
+        font-size: 1.1rem;
+        padding: 0.4rem;
+    }
+
+    /* Riduci ulteriormente badge */
+    .main-header-badge {
+        font-size: 0.6rem;
+        min-width: 14px;
+        min-height: 14px;
+        top: 0px;
+        right: 0px;
+        border-width: 0;
+        /* Rimuovi bordo badge piccolo */
+    }
+}
+
+/* Mobile Stretto (240px) */
+@media (max-width: 240px) {
+    .main-header {
+        height: 50px;
+        /* Header ancora più basso */
+        padding: 0 var(--spacing-sm);
+        /* Padding minimo */
+    }
+
+    /* Nascondi completamente la navigazione centrale */
+    .main-header__nav {
+        display: none;
+    }
+
+    /* Nascondi completamente il nome utente */
+    .main-header__user-info {
+        display: none;
+    }
+}

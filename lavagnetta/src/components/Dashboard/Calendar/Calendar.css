@@ -1,0 +1,363 @@
+/* ==== src/components/Dashboard/Calendar/Calendar.css (PRONTO) ==== */
+
+/* Contenitore Wrapper Esterno */
+.calendar-wrapper {
+    position: relative;
+    /* Per posizionare l'overlay di loading */
+    background-color: var(--color-bg-dark);
+    /* Sfondo scuro per l'area esterna */
+    padding: var(--spacing-base);
+    border-radius: var(--border-radius-lg);
+    /* Arrotondamento maggiore */
+    box-shadow: var(--shadow-medium);
+    border: 1px solid var(--color-border-dark);
+}
+
+/* Overlay di Loading Iniziale */
+.calendar-loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(33, 37, 41, 0.85);
+    /* Sfondo scuro semi-trasparente */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 15;
+    /* Sopra il calendario ma sotto le modali */
+    border-radius: var(--border-radius-lg);
+    /* Arrotonda come il wrapper */
+    color: var(--color-text-light-gray);
+    opacity: 1;
+    transition: opacity 0.3s ease-out;
+}
+
+.calendar-loading-overlay p {
+    margin-top: var(--spacing-base);
+    font-size: var(--fs-ui);
+}
+
+/* Nascondi overlay quando non serve (transizione fade-out) */
+.calendar-container:not(.calendar-ready)+.calendar-loading-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+.calendar-container.calendar-ready+.calendar-loading-overlay {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    /* Non interagibile quando nascosto */
+}
+
+
+/* Contenitore FullCalendar effettivo */
+.calendar-container {
+    background-color: var(--color-bg-light-contrast);
+    /* SFONDO CHIARO per la GRIGLIA */
+    color: var(--color-text-dark-contrast);
+    /* Testo scuro sulla griglia chiara */
+    font-family: var(--font-secondary);
+    /* LATO per UI calendario */
+    border-radius: var(--border-radius);
+    /* Arrotondamento interno */
+    overflow: hidden;
+    /* Nasconde bordi interni se necessario */
+    border: 1px solid var(--color-border-light);
+    /* Bordo chiaro attorno alla griglia */
+    opacity: 0;
+    /* Nascosto inizialmente */
+    transition: opacity 0.4s 0.1s ease-in;
+    /* Appare dopo il loading overlay */
+}
+
+.calendar-container.calendar-ready {
+    opacity: 1;
+    /* Mostra quando pronto */
+}
+
+
+/* --- Stili FullCalendar --- */
+
+/* Toolbar (Header Calendario) */
+.fc .fc-toolbar {
+    background-color: var(--color-bg-dark);
+    /* Sfondo SCURO per toolbar */
+    color: var(--color-text-chalk);
+    /* Testo chiaro */
+    padding: var(--spacing-base) var(--spacing-md);
+    margin-bottom: 0 !important;
+    border-bottom: 1px solid var(--color-border-dark);
+    /* Bordo scuro sotto toolbar */
+}
+
+.fc .fc-toolbar-title {
+    font-family: var(--font-primary);
+    /* Caveat per Titolo Mese/Anno */
+    font-size: 1.8rem;
+    font-weight: var(--fw-bold);
+    color: var(--color-accent-primary);
+    /* Ocra */
+    text-shadow: var(--text-shadow-chalk);
+    /* Ombra gesso */
+}
+
+/* Pulsanti Toolbar (prev, next, today, view switcher) */
+.fc .fc-button {
+    font-family: var(--font-secondary);
+    /* LATO */
+    background-color: var(--color-bg-medium);
+    /* Sfondo grigio medio */
+    border: 1px solid var(--color-border-dark);
+    color: var(--color-text-light-gray);
+    /* Grigio chiaro */
+    text-transform: capitalize;
+    font-size: var(--fs-ui);
+    font-weight: var(--fw-bold);
+    padding: 0.4em 0.8em;
+    box-shadow: none !important;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+    border-radius: var(--border-radius-sm);
+}
+
+.fc .fc-button:hover {
+    background-color: var(--color-accent-secondary);
+    /* Grigio scuro hover */
+    border-color: var(--color-accent-secondary);
+    color: var(--color-text-chalk);
+}
+
+/* Pulsante Attivo (es. Mese/Settimana selezionato) */
+.fc .fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-button-primary:not(:disabled):active {
+    background-color: var(--color-accent-primary);
+    /* Ocra attivo */
+    border-color: var(--color-accent-primary);
+    color: var(--color-text-dark-contrast);
+    /* Testo scuro su ocra */
+    box-shadow: none !important;
+}
+
+.fc .fc-button .fc-icon {
+    font-size: 1.3em;
+    /* Icone freccia più grandi */
+    vertical-align: middle;
+}
+
+
+/* Header Giorni Settimana (Lun, Mar...) */
+.fc .fc-col-header-cell {
+    background-color: #e9ecef;
+    /* Grigio molto chiaro per header giorni */
+    padding: 0.7rem 0.5rem;
+    border: 1px solid var(--color-border-light);
+    /* Bordo chiaro */
+    border-bottom-width: 2px;
+}
+
+.fc .fc-col-header-cell-cushion {
+    /* Testo giorno (es. "lun") */
+    font-weight: bold;
+    color: var(--color-text-medium-gray);
+    /* Grigio medio */
+    font-size: 0.85rem;
+    text-decoration: none !important;
+    text-transform: capitalize;
+    /* Prima lettera maiuscola */
+}
+
+/* Celle Giorni Griglia */
+.fc .fc-daygrid-day {
+    border: 1px solid var(--color-border-light);
+    /* Bordo chiaro celle */
+    background-color: var(--color-bg-light-contrast);
+    /* Sfondo bianco/chiaro celle */
+    transition: background-color 0.2s ease;
+}
+
+/* Hover su cella giorno */
+.fc .fc-daygrid-day:not(.fc-day-other):hover {
+    /* Solo giorni del mese corrente */
+    background-color: #f1f3f5;
+    /* Leggermente più scuro su hover */
+}
+
+/* Numero del giorno */
+.fc .fc-daygrid-day-number {
+    font-size: 0.9em;
+    padding: 5px 7px;
+    color: var(--color-text-medium-gray);
+    /* Grigio medio */
+    text-align: right;
+    text-decoration: none !important;
+    font-weight: var(--fw-bold);
+}
+
+/* Giorno corrente ('Oggi') */
+.fc .fc-day-today {
+    /* Applica a tutta la cella */
+    background-color: var(--color-warning-background) !important;
+    /* Sfondo ocra molto leggero */
+}
+
+.fc .fc-day-today .fc-daygrid-day-number {
+    color: var(--color-accent-primary-darker) !important;
+    /* Numero ocra scuro */
+    font-weight: var(--fw-bold);
+    background-color: rgba(255, 193, 7, 0.2);
+    /* Cerchio leggero attorno al numero */
+    border-radius: 50%;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 16px;
+    /* Aggiusta per centrare */
+    text-align: center;
+    padding: 4px;
+}
+
+/* Giorni Mese Precedente/Successivo */
+.fc .fc-day-other .fc-daygrid-day-number {
+    opacity: 0.5;
+    /* Rendi numeri altri mesi meno visibili */
+}
+
+.fc .fc-day-other {
+    background-color: #f8f9fa;
+    /* Sfondo leggermente diverso per altri mesi */
+}
+
+
+/* --- Eventi nel Calendario --- */
+.fc .fc-daygrid-event {
+    /* Contenitore singolo evento */
+    /* Usa classe .calendar-event-note per styling specifico */
+}
+
+.calendar-event-note {
+    /* Classe applicata agli eventi nota */
+    background-color: var(--color-info);
+    /* Blu Acciaio per le note */
+    border-color: var(--color-info-hover);
+    /* Bordo Blu scuro */
+    color: var(--color-text-chalk) !important;
+    /* Testo chiaro (forzato) */
+    font-size: 0.85em;
+    padding: 4px 6px;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, transform 0.1s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 3px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.calendar-event-note:hover {
+    background-color: var(--color-info-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.fc .fc-event-title {
+    /* Testo dentro l'evento */
+    font-weight: var(--fw-bold);
+    color: inherit;
+    /* Eredita colore da .calendar-event-note */
+    font-family: var(--font-secondary);
+    /* LATO per titolo evento */
+}
+
+/* Link "+ X altri eventi" */
+.fc .fc-daygrid-more-link {
+    color: var(--color-accent-primary);
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+.fc .fc-daygrid-more-link:hover {
+    text-decoration: underline;
+}
+
+/* --- Stili Modali Calendario (React-Bootstrap) --- */
+/* La classe .calendar-modal è aggiunta alle modali nel JSX */
+.calendar-modal .modal-content {
+    /* Stili ereditati da index.css, qui eventuali override */
+    font-family: var(--font-secondary);
+    /* Assicura LATO */
+}
+
+.calendar-modal .modal-header .modal-title {
+    color: var(--color-accent-primary);
+    /* Titolo ocra */
+    /* Font Caveat ereditato da index.css */
+}
+
+.calendar-modal .modal-body {
+    background-color: var(--color-bg-dark);
+    /* Corpo modale SCURO */
+    color: var(--color-text-light-gray);
+    /* Testo chiaro */
+}
+
+/* Override stile form se necessario (dovrebbe ereditare da index.css) */
+.calendar-modal .form-label {
+    color: var(--color-text-light-gray);
+}
+
+.calendar-modal .form-control,
+.calendar-modal .form-control:focus {
+    background-color: var(--color-bg-medium);
+    color: var(--color-text-chalk);
+    border-color: var(--color-border-dark);
+}
+
+.calendar-modal .form-control:focus {
+    border-color: var(--color-accent-primary);
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.35);
+}
+
+.calendar-modal .required-field {
+    color: var(--color-danger);
+    /* Asterisco rosso */
+    font-weight: bold;
+    margin-left: 2px;
+}
+
+.calendar-modal .modal-footer {
+    background-color: var(--color-bg-medium);
+    /* Footer grigio medio */
+    border-top-color: var(--color-border-dark);
+    /* Bordo scuro */
+}
+
+/* Stile bottoni nel footer (ereditati o specifici) */
+.calendar-modal .modal-footer .btn {
+    font-family: var(--font-secondary);
+    /* LATO per bottoni modale */
+    font-weight: var(--fw-bold);
+}
+
+/* Alert errori nel form */
+.calendar-modal .alert-danger {
+    font-size: var(--fs-sm);
+    /* Colori ereditati da index.css */
+}
+
+/* Aggiungi a Calendar.css */
+.calendar-event-note {
+    background-color: var(--color-info) !important;
+    border-color: var(--color-info-hover) !important;
+    color: var(--color-text-chalk) !important;
+}
+
+.calendar-event-expense {
+    background-color: var(--color-warning) !important;
+    border-color: var(--color-warning-hover) !important;
+    color: var(--color-text-dark-contrast) !important;
+    /* Testo scuro su sfondo giallo */
+}

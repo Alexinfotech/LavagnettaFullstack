@@ -1,0 +1,19 @@
+/* ==== src/components/Modals/ConfirmDeleteProductModal.css (Opzionale) ==== */
+
+/* Stili specifici per questa modale, se gli stili globali non bastano */
+
+.confirm-delete-product-modal .modal-body {
+    /* Esempio: Aumenta padding se necessario */
+    /* padding-top: var(--spacing-lg); */
+    /* padding-bottom: var(--spacing-lg); */
+}
+
+.confirm-delete-product-modal .modal-body strong {
+    /* Evidenzia il nome del prodotto */
+    color: var(--color-text-chalk);
+}
+
+.confirm-delete-product-modal .modal-footer .btn-danger svg {
+    /* Aggiusta allineamento icona se necessario */
+    vertical-align: text-bottom;
+}

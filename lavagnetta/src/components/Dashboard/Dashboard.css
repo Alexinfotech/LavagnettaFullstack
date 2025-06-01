@@ -1,0 +1,63 @@
+/* ==== src/components/Dashboard/Dashboard.css (MODIFICATO per Responsive) ==== */
+
+/* Contenitore principale Dashboard */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    /* Stack verticale di default */
+    gap: var(--responsive-padding-lg);
+    /* Spazio tra sezioni RESPONSIVE */
+    width: 100%;
+    max-width: 1600px;
+    /* Limite larghezza */
+    margin: 0 auto;
+    /* Centra */
+    box-sizing: border-box;
+    /* Padding ora gestito da .content-wrapper.scrollable-content in App.css */
+    /* padding: var(--responsive-padding-lg); */
+    /* Rimosso da qui */
+}
+
+/* Sezioni interne (Calendario, Preview) */
+.dashboard-section {
+    width: 100%;
+    /* Stili opzionali (es. background, border-radius) rimangono */
+}
+
+/* Titolo opzionale sezione (invariato) */
+.dashboard-section-title {
+    /* ... */
+}
+
+/* === Media Query per Layout Affiancato (Desktop Largo) === */
+@media (min-width: 1200px) {
+    .dashboard-container {
+        flex-direction: row;
+        /* Affianca */
+        align-items: flex-start;
+        gap: var(--responsive-padding-lg);
+        /* Spazio orizzontale */
+    }
+
+    .dashboard-section.calendar-section {
+        flex: 0 0 450px;
+        /* Larghezza fissa calendario */
+    }
+
+    .dashboard-section.preview-section {
+        flex: 1;
+        /* Preview occupa resto */
+        min-width: 0;
+    }
+}
+
+/* === Media Query Generali (Tablet/Mobile) === */
+/* Non servono regole specifiche qui perché il layout di default è già a colonna
+   e i padding/gap sono gestiti dalle variabili responsive globali in App.css e index.css */
+
+/* Esempio (SE SERVISSE): Ridurre gap su mobile stretto */
+/* @media (max-width: 576px) {
+    .dashboard-container {
+        gap: var(--responsive-padding-md);
+    }
+} */

@@ -1,0 +1,113 @@
+/* ==== src/components/GroupDashboard/GroupCard/GroupCard.css (MODIFICATO per Responsive) ==== */
+
+.group-card {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-light-gray);
+    padding: var(--responsive-padding-md);
+    /* Usa padding responsive */
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out;
+    border: 1px solid var(--color-border-dark);
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+}
+
+.group-card:hover,
+.group-card:focus-visible {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--color-accent-primary);
+    outline: none;
+}
+
+.group-card--invalid {
+    /* (invariato) */
+}
+
+.group-card--invalid:hover {
+    /* (invariato) */
+}
+
+.group-card--invalid h3 {
+    /* (invariato) */
+}
+
+/* Titolo Card */
+.group-card__title {
+    margin: 0 0 var(--spacing-base) 0;
+    font-size: 1.8rem;
+    /* Scala con base */
+    font-weight: var(--fw-bold);
+    color: var(--color-text-chalk);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+    font-family: var(--font-primary);
+    text-shadow: var(--text-shadow-chalk);
+    /* Assicura font/ombra */
+}
+
+/* Statistiche */
+.group-card__stats {
+    font-family: var(--font-secondary);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm) var(--spacing-md);
+    margin-bottom: var(--spacing-base);
+    font-size: var(--fs-sm);
+    /* Scala con base */
+    color: var(--color-text-light-gray);
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stat__icon {
+    font-size: 1.1em;
+    color: var(--color-text-medium-gray);
+    flex-shrink: 0;
+}
+
+.stat__text {
+    line-height: 1.2;
+}
+
+/* Ruolo Utente */
+.group-card__role {
+    font-family: var(--font-secondary);
+    font-size: var(--fs-sm);
+    /* Scala con base */
+    color: var(--color-text-medium-gray);
+    margin-top: auto;
+    padding-top: var(--spacing-base);
+    border-top: 1px dashed var(--color-border-dark);
+    text-align: right;
+}
+
+.group-card__role .role-value {
+    /* (invariato) */
+}
+
+/* Media Query opzionale per ridurre leggermente font su mobile stretto */
+@media (max-width: 576px) {
+    .group-card__title {
+        font-size: 1.6rem;
+    }
+
+    .group-card__stats {
+        font-size: 0.8rem;
+        gap: var(--spacing-xs) var(--spacing-sm);
+    }
+
+    .group-card__role {
+        font-size: 0.8rem;
+    }
+}

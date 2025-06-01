@@ -1,0 +1,361 @@
+/* ==== src/components/Board/Board.css (MODIFICATO per Responsive) ==== */
+
+/* Wrapper Esterno (invariato) */
+.board-layout-wrapper {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Layer Sfondo (invariato) */
+.board-background-layer {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: 0;
+}
+
+/* --- Input Area (in Board.jsx ora, non più qui) --- */
+/* Gli stili per .add-item-area, .input-group, .add-item-input, .btn-add-item
+   dovrebbero essere gestiti globalmente o nel componente stesso se necessario.
+   Rimuoviamo stili specifici da qui se non servono più. */
+
+/* Contenitore Lista Prodotti Scrollabile */
+.product-list-container.scrollable-list {
+    height: 100%;
+    overflow-y: auto;
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* Padding gestito con variabili responsive globali */
+    padding-left: var(--responsive-padding-lg);
+    padding-right: var(--responsive-padding-lg);
+    /* Spazio FAB: usa altezza FAB + padding */
+    padding-bottom: calc(56px + var(--responsive-padding-lg) + var(--responsive-padding-sm));
+    /* Padding Top dinamico */
+    padding-top: calc(var(--sub-header-height, 55px) + var(--responsive-padding-md));
+    transition: padding-top 0.3s ease-out;
+}
+
+.product-list-container.scrollable-list.sub-header-is-hidden {
+    padding-top: var(--responsive-padding-md);
+}
+
+.product-list-container.scrollable-list::-webkit-scrollbar {
+    display: none;
+}
+
+/* Lista UL */
+.product-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 700px;
+    /* Mantiene leggibilità su schermi larghi */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Messaggio "Lavagna Vuota" */
+.no-items-message {
+    text-align: center;
+    font-size: 1.8rem;
+    /* Scala con font base */
+    color: var(--color-text-light-gray);
+    padding: var(--spacing-xl) 0;
+    opacity: 0.9;
+    font-family: var(--font-primary);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    margin-top: var(--spacing-lg);
+}
+
+/* Wrapper Singolo Item */
+.product-item-wrapper {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-base) 0;
+    /* Padding verticale */
+    margin-bottom: var(--spacing-xs);
+    transition: background-color 0.15s ease, opacity 0.2s ease;
+    /* Aggiunta opacity */
+    border-radius: var(--border-radius-sm);
+    -webkit-tap-highlight-color: transparent;
+    /* Rimuove flash blu su tap mobile */
+}
+
+.product-item-wrapper:not(.editing):hover {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+/* Stile Item in Loading (toggle/delete) */
+.product-item-wrapper.loading-item {
+    opacity: 0.6;
+    pointer-events: none;
+    /* Disabilita interazioni */
+}
+
+/* Nome Prodotto */
+.item-name {
+    flex-grow: 1;
+    font-family: var(--font-primary);
+    font-size: 2rem;
+    /* Scala con font base */
+    color: var(--color-text-chalk);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+    line-height: 1.3;
+    padding: 0 var(--spacing-sm);
+    /* Padding laterale nome */
+    word-break: break-word;
+    user-select: none;
+    transition: color 0.2s ease, opacity 0.2s ease, text-decoration-color 0.2s ease;
+    display: inline-flex;
+    /* Per allineare spinner */
+    align-items: center;
+    /* Allinea spinner verticalmente */
+}
+
+.item-name .spinner-grow {
+    /* Stile spinner vicino al nome */
+    width: 0.8em;
+    height: 0.8em;
+}
+
+/* Nome Comprato */
+.product-item-wrapper.purchased .item-name {
+    text-decoration: line-through;
+    text-decoration-thickness: 2.5px;
+    text-decoration-color: rgba(255, 193, 7, 0.7);
+    color: var(--color-text-medium-gray);
+    opacity: 0.8;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Controlli Modifica */
+.edit-mode-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 0 var(--spacing-xs);
+    flex-grow: 1;
+    background-color: rgba(50, 50, 50, 0.7);
+    border-radius: var(--border-radius-sm);
+}
+
+/* Input Modifica */
+.edit-mode-controls .edit-input.form-control {
+    font-family: var(--font-secondary);
+    font-size: var(--fs-lg);
+    /* Usa variabile */
+    padding: 0.4rem 0.7rem;
+    flex-grow: 1;
+    height: auto;
+    background-color: var(--color-bg-dark) !important;
+    border-color: var(--color-border-medium) !important;
+    color: var(--color-text-chalk) !important;
+    box-shadow: none !important;
+}
+
+.edit-mode-controls .edit-input.form-control:focus {
+    background-color: var(--color-bg-dark) !important;
+    border-color: var(--color-accent-primary) !important;
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.35) !important;
+}
+
+/* Bottoni Icona (Generale) */
+.btn-icon {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    /* Scala con font */
+    font-size: 1.2rem;
+    /* Scala con font */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: color 0.2s, background-color 0.2s;
+    line-height: 1;
+    flex-shrink: 0;
+    color: var(--color-text-light-gray);
+    display: inline-flex;
+    /* Per centrare spinner */
+    align-items: center;
+    justify-content: center;
+    min-width: calc(1.2rem + 1rem);
+    /* Larghezza minima per contenere icona+padding */
+    min-height: calc(1.2rem + 1rem);
+    /* Altezza minima */
+}
+
+.btn-icon .spinner-border-sm {
+    width: 1em;
+    height: 1em;
+}
+
+/* Adatta spinner */
+.btn-icon:hover:not(:disabled) {
+    background-color: var(--color-bg-medium);
+}
+
+.btn-icon:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Bottoni Specifici */
+.delete-button {
+    margin-left: auto;
+    color: var(--color-text-medium-gray);
+}
+
+.delete-button:hover:not(:disabled) {
+    color: var(--color-danger);
+    background-color: var(--color-danger-background);
+}
+
+.save-button {
+    color: var(--color-text-medium-gray);
+}
+
+.save-button:hover:not(:disabled) {
+    color: var(--color-success);
+    background-color: var(--color-success-background);
+}
+
+.save-button:disabled {
+    color: var(--color-text-medium-gray) !important;
+    opacity: 0.4;
+}
+
+.cancel-button {
+    color: var(--color-text-medium-gray);
+}
+
+.cancel-button:hover:not(:disabled) {
+    color: var(--color-danger);
+    background-color: var(--color-danger-background);
+}
+
+/* === MEDIA QUERIES Board === */
+@media (max-width: 768px) {
+    .item-name {
+        font-size: 1.8rem;
+    }
+
+    /* Riduci nome prodotto */
+}
+
+@media (max-width: 576px) {
+    .item-name {
+        font-size: 1.6rem;
+    }
+
+    .product-item-wrapper {
+        padding: var(--spacing-sm) 0;
+    }
+
+    /* Riduci padding item */
+    .btn-icon {
+        font-size: 1rem;
+        padding: 0.4rem;
+        min-width: calc(1rem + 0.8rem);
+        min-height: calc(1rem + 0.8rem);
+    }
+
+    /* Riduci icone */
+    .edit-mode-controls {
+        gap: var(--spacing-xs);
+    }
+
+    /* Meno spazio in edit mode */
+    .edit-mode-controls .edit-input.form-control {
+        font-size: 1rem;
+    }
+
+    /* Input edit più piccolo */
+    .no-items-message {
+        font-size: 1.5rem;
+    }
+
+    /* Messaggio vuoto più piccolo */
+    .product-list-container.scrollable-list {
+        padding-left: var(--responsive-padding-md);
+        /* Usa padding responsive medio */
+        padding-right: var(--responsive-padding-md);
+        padding-bottom: calc(50px + var(--responsive-padding-md) + var(--responsive-padding-sm));
+        /* Adatta per FAB ridotto */
+    }
+}
+
+/* Stile per il nome utente modificatore */
+.modifier-username {
+    color: #e0e0e0;
+    /* Un grigio molto chiaro, visibile sulla lavagna ma distinto dal bianco puro */
+    /* Puoi sperimentare con altri colori chiari se questo non contrasta abbastanza: */
+    /* color: #ffffdd; */
+    /* Giallo molto pallido */
+    /* color: #d0d0d0; */
+    /* Un altro grigio chiaro */
+    font-size: 0.8em;
+    /* Leggermente più piccolo del nome prodotto */
+    /* Rimosso font-style: italic; per migliore leggibilità */
+}
+
+/* Opzionale: Rendi il nome prodotto leggermente più prominente */
+/* .item-name {
+    font-weight: 500; /* O 600, a seconda del font */
+/* } */
+
+/* Assicurati che il contenitore permetta l'allineamento */
+.item-name-container {
+    display: inline-flex;
+    /* Permette a nome e modificatore di stare sulla stessa linea */
+    align-items: baseline;
+    /* Allinea le baseline del testo */
+    flex-wrap: nowrap;
+    /* Evita che il modificatore vada a capo se c'è spazio */
+}
+
+/* Stili esistenti per product-item-wrapper, purchased, etc. */
+.product-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    /* Rimuovi margini di default se necessario */
+    color: white;
+    /* Colore testo di default per la lista */
+}
+
+.product-item-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    /* Linea separatrice sottile */
+    transition: background-color 0.2s ease-in-out;
+}
+
+.product-item-wrapper:last-child {
+    border-bottom: none;
+}
+
+/* Stile per item acquistati */
+.product-item-wrapper.purchased .item-name-container .item-name {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+/* Stile per il nome modificatore quando l'item è acquistato (opzionale, può rimanere uguale) */
+.product-item-wrapper.purchased .item-name-container .modifier-username {
+    opacity: 0.7;
+    /* Leggermente più opaco del nome barrato? */
+}
+
+/* ultimo*/

@@ -1,0 +1,255 @@
+/* ==== src/App.css (Riscritto v4 - FAB position: fixed) ==== */
+
+/* --- VARIABILI CSS --- */
+:root {
+  --sub-header-height: 55px;
+  --responsive-padding-lg: var(--spacing-lg);
+  --responsive-padding-md: var(--spacing-md);
+  --responsive-padding-sm: var(--spacing-base);
+  /* AGGIUNTA: Variabile per altezza FAB */
+  --fab-height: 56px;
+  --fab-bottom-spacing: var(--responsive-padding-lg);
+  --fab-right-spacing: var(--responsive-padding-lg);
+}
+
+@media (max-width: 576px) {
+  :root {
+    --fab-height: 50px;
+    --fab-bottom-spacing: var(--responsive-padding-md);
+    --fab-right-spacing: var(--responsive-padding-md);
+  }
+}
+
+
+/* --- Layout Specifici --- */
+.protected-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--color-bg-deep-dark);
+  overscroll-behavior: contain;
+}
+
+.main-header {
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+}
+
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- WRAPPER PER CONTENUTO --- */
+.content-wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.content-wrapper.scrollable-content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--responsive-padding-lg);
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+/* --- Layouts Interni (Board Personale e Gruppo) --- */
+.personal-board-layout,
+.group-board-view-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 0;
+  position: relative;
+  /* Mantenuto per posizionare .board-content-area */
+  overflow: hidden;
+  z-index: 5;
+}
+
+.personal-board-layout .board-content-area,
+.group-board-view-container .board-content-area {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* --- Stili Placeholder --- */
+.board-placeholder-loading,
+.board-placeholder-select,
+.board-placeholder-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  padding: var(--responsive-padding-lg);
+  text-align: center;
+  background-color: rgba(33, 37, 41, 0.5);
+  pointer-events: none;
+}
+
+.board-placeholder-loading p,
+.board-placeholder-select p,
+.board-placeholder-empty p {
+  font-family: var(--font-secondary);
+  color: var(--color-text-light-gray);
+}
+
+/* --- GESTIONE SUB-HEADER --- */
+.sub-header-wrapper {
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  /* Sopra contenuto ma sotto header principale */
+  transition: transform 0.3s ease-out, visibility 0s linear 0.3s;
+  transform: translateY(0);
+  height: var(--sub-header-height);
+  pointer-events: auto;
+  visibility: visible;
+  will-change: transform;
+  contain: layout style;
+}
+
+.sub-header-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-bg-medium);
+}
+
+.sub-header-wrapper.sub-header--hidden {
+  transform: translateY(-100%);
+  visibility: hidden;
+  pointer-events: none;
+  transition-delay: 0s;
+}
+
+/* --- STILI PER FLOATING ACTION BUTTON (FAB) --- */
+.fab-add-button {
+  /* MODIFICA: Cambiato in position: fixed */
+  position: fixed;
+  /* Posizionato rispetto al viewport */
+  bottom: var(--fab-bottom-spacing);
+  /* Usa variabile per distanza dal basso */
+  right: var(--fab-right-spacing);
+  /* Usa variabile per distanza da destra */
+  z-index: 1000;
+  /* Può rimanere 1000 o aumentarlo se necessario (es. 1021) */
+  width: var(--fab-height);
+  /* Usa variabile per dimensione */
+  height: var(--fab-height);
+  /* Usa variabile per dimensione */
+  border-radius: 50%;
+  background-color: var(--color-accent-primary);
+  color: var(--color-text-dark-contrast);
+  border: none;
+  box-shadow: var(--shadow-medium);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
+  /* Potrebbe essere necessario scalarlo nelle media query */
+  cursor: pointer;
+  transition: transform 0.2s ease-out, background-color 0.2s ease-out, box-shadow 0.2s ease-out;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.fab-add-button:hover {
+  background-color: var(--color-accent-primary-darker);
+  box-shadow: var(--shadow-hard);
+  transform: scale(1.05);
+}
+
+.fab-add-button:active {
+  transform: scale(0.95);
+  box-shadow: var(--shadow-soft);
+}
+
+/* === Stili Suggerimenti Autocompletamento === */
+.modal-body .form-group {
+  position: relative;
+}
+
+.suggestion-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 4px 0 0 0;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  background-color: white;
+  z-index: 1060;
+  width: 100%;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  left: 0;
+  top: 100%;
+}
+
+.suggestion-list li {
+  padding: 8px 12px;
+  cursor: pointer;
+  color: #6c757d;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.suggestion-list li:hover {
+  background-color: #f8f9fa;
+  color: #495057;
+}
+
+.suggestion-list li.suggestion-active {
+  background-color: #e9ecef;
+  color: #212529;
+}
+
+/* === MEDIA QUERIES === */
+@media (max-width: 992px) {
+  :root {
+    --responsive-padding-lg: var(--spacing-md);
+    --responsive-padding-md: var(--spacing-base);
+    --responsive-padding-sm: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 576px) {
+  :root {
+    --responsive-padding-lg: var(--spacing-base);
+    --responsive-padding-md: var(--spacing-sm);
+    --responsive-padding-sm: var(--spacing-xs);
+    --sub-header-height: 52px;
+    /* --fab-height già definito a 50px nella variabile :root */
+  }
+
+  .fab-add-button {
+    /* Le dimensioni e posizioni sono già gestite dalle variabili --fab-height, --fab-bottom-spacing, --fab-right-spacing */
+    font-size: 1.6rem;
+    /* Riduci dimensione icona interna */
+    padding: 0.8rem;
+    /* Mantiene padding aumentato per area tocco */
+  }
+}
