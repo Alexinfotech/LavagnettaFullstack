@@ -64,6 +64,8 @@ Questo repository mira a fornire una **soluzione completa e pronta all'uso** per
 - **PWA**: Service Worker, Web App Manifest
 - **Altro**: Axios per chiamate API.
 
+- ![Screenshot del Login](screenshot_monile.jpg)
+
 ## Caratteristiche Principali
 
 - **Autenticazione Utenti**: Registrazione e Login sicuri.
