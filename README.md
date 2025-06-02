@@ -64,7 +64,7 @@ Questo repository mira a fornire una **soluzione completa e pronta all'uso** per
 - **PWA**: Service Worker, Web App Manifest
 - **Altro**: Axios per chiamate API.
 
-![Screenshot del Login](screenshot_monile.png)
+![Screenshot del Login](screenshot-monile.png)
 
 ## Caratteristiche Principali
 
