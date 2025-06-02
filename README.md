@@ -64,7 +64,6 @@ Questo repository mira a fornire una **soluzione completa e pronta all'uso** per
 - **PWA**: Service Worker, Web App Manifest
 - **Altro**: Axios per chiamate API.
 
-![Screenshot del Login](screenshot-mobile.png)
 
 ## Caratteristiche Principali
 
@@ -1011,3 +1010,11 @@ Si prega di seguire le convenzioni di codifica esistenti nel progetto e di mante
 ## Licenza
 
 Questo progetto è rilasciato sotto la Licenza GNU GENERAL PUBLIC LICENSE. Vedi il file `LICENSE` nel repository per maggiori dettagli.
+
+![Screenshot del Login](screenshot-mobile.png)
+![Screenshot del Login](frettolosa.jpg)
+![Screenshot del Login](gesso.jpg)
+![Screenshot del Login](icon-512x512.png)
+
+
+
